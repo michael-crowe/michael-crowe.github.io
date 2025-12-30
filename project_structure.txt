@@ -1,0 +1,15 @@
+src/
+├── components # All components, like navbar, scanner, any 'component' used on the site
+|   |──NavBar  # A Navagation menu at the top of the site
+|   |──Scanner # A cool reusable animation (visual "flair").
+├── data/
+│   └── database.json   # All your courses, projects, games, etc.
+├── pages/
+│   ├── Home/
+│   ├── Projects/
+│   ├── Archive/       # Place to show courses and projects
+│   └── Terminal/      # Cool terminal view that shows list of games with stats and/or tech list
+├── components/              # Reusable UI (Navbar, Card, Button)
+└── assets/
+    └── styles/
+        └── _variables.scss # Defined variables used throughout the site

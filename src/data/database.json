@@ -1,0 +1,45 @@
+{
+    "courses": [
+        {
+            "name": "CompTIA Security+", 
+            "status": "Not Certified",
+            "vendor": "CompTIA",
+            "instructor": "",
+            "url": "",
+            "date": "",
+            "catgegory": "Defensive"
+        },
+        {
+            "name": "Node.js",
+            "status": "Completed",
+            "vendor": "uDemy",
+            "instructor": "need name",
+            "url": "https://udemy.com",
+            "date": "TBD",
+            "catgegory": "Development"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Portfolio Site",
+            "status": "In Progress",
+            "details": "Site that I built",
+            "technologies": [
+                "React", 
+                "Vite+",
+                "SCSS", 
+                "React Icons"
+            ]
+        }
+    ],
+    "games": [
+        {
+            "name": "Whiteout Survival",
+            "Platform": "Mobile Phone"
+        },
+        {
+            "name": "Battlefield 6",
+            "Platform": "Playstation 5"
+        }
+    ]
+}
