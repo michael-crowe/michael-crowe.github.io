@@ -1,4 +1,12 @@
-@import './assets/styles/variables';
+// Abstract (No CSS output, just tools and variables
+@use '/src/assets/styles/abstract/variables' as *;
+
+// Base (Gloabl Reset)
+@use '/src/assets/styles/base/reset';
+
+// Layout (The Skeleton
+@use '/src/assets/styles/layout/layout';
+
 
 body {
     background-color: $bg-charcoal;

@@ -1,0 +1,23 @@
+// Cyber Security Theme Colors
+
+$bg-charcoal: #2C2C2E; // Charcoal color
+$terminal-green: #00ff41; // Classic Matrix Green color
+$cyber-blue: #00d4ff; // Electric Neon Blue
+$alert-red: #ff3e3e; // Security Breach red
+$dark-gray: #1a1a1a; // Card background
+
+// Fonts - Monospoace is key for the "Security" feel
+$code-font: 'Fria Code', 'Courier New', monospace;
+$main-font: 'Inter', sans-serif;
+
+// Effects
+$neon-glow: 0 0 10px rgba(0, 255, 65, 0.5);
+$border-glow: 15px solid $terminal-green;
+
+
+// React Icons
+.github {
+    color: $terminal-green;
+    font-size: 1.5rem;
+    padding: 0;
+}
