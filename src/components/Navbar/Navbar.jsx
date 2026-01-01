@@ -2,30 +2,17 @@ import React from 'react';
 import '/src/assets/styles/components/_navbar.scss'
 import { NavLink } from 'react-router-dom';
 
+import {navLinks, socialLinks} from '/src/data/database.json'
+
 //Icons
-import { AiFillGithub } from "react-icons/ai";
-import { AiFillLinkedin } from "react-icons/ai";
+import { AiFillGithub, AiFillLinkedin } from "react-icons/ai";
 
-//creating array of links
+const iconMap = {
+    github: <AiFillGithub />,
+    linkedin: <AiFillLinkedin />
+};
 
-const navLinks = [
-    {
-        name: 'Home',
-        path: '/',
-        id: '1'
-    },
-    {
-        name: 'Archive',
-        path: '/Archive',
-        id: '2'
-    },
-    {
-        name: 'Terminal',
-        path: '/Terminal',
-        id: '3'
-    }
 
-]
 
 const Navbar = () => {
 
@@ -37,31 +24,33 @@ const Navbar = () => {
                         michael@crowe-terminal
                     </NavLink>
                 </div>
-                    <ul className='navbar__list'>
-                        {
-                            navLinks.map((link) => (
-                                <li className='navbar__item' key={link.id}>
-                                    <NavLink className={'navbar__link'} to={link.path}>
-                                        <span className='navbar__permissions'>r--</span>[{link.name}]
-                                    </NavLink>
-                                </li>
-
-                            ))
-                        }
-                    </ul>
+                <ul className='navbar__list'>
+                    {navLinks.map((link) => (
+                        <li className='navbar__item' key={link.id}>
+                            <NavLink className={'navbar__link'} to={link.path}>
+                                <span className='navbar__permissions'>r--</span>[{link.name}]
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
 
             </div>
             <div className='navbar__right'>
-                <div className='navbar__social-list'>
-                    <a className='navbar__link' href="https://github.com/michael-crowe" target="_blank" rel='noopener noreferrer'>
-                        <AiFillGithub />
-                    </a>
-                    <a className='navbar__link' href="https://www.linkedin.com/in/michael--crowe/" target="_blank" rel="noopener noreferrer">
-                        <AiFillLinkedin />
-                    </a>
-                </div>
+                <ul className='navbar__social-list'>
+                    {socialLinks.map((social) => (
+                        <li key={social.id} className='navbar__item'>
+                            <a 
+                                className="navbar__link" 
+                                href={social.url} 
+                                target="_blank" 
+                                rel='noopener noreferrer'
+                            >
+                                {iconMap[social.name.toLowerCase()]}
+                            </a>
+                        </li>
+                        ))}
+                </ul>
             </div>
-
         </nav>
     );
 };

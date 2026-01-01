@@ -1,0 +1,44 @@
+@use '../abstract/variables' as *;
+
+.prompt {
+    display: flex;
+    gap: 10px;
+    padding: 1rem;
+    background-color: $bg-charcoal;
+    border-top: 1px solid rgba($terminal-green, 0.2);
+    align-items: center;
+
+    &__user {
+        color: $terminal-green;
+    }
+
+    &__input {
+        background: transparent !important;
+        border: none !important;
+        color: rgba($terminal-green, 0.7);
+        font-family: 'Courier New', monospace;
+        flex: 1;
+        outline: none;
+        caret-color: $terminal-green;
+        appearance: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+
+        text-shadow: 0 0 1px rgba($terminal-green, 0.2);
+        caret-color: $terminal-green;
+
+        &:focus{
+            outline: none;
+        }
+
+        &::placeholder {
+            color: rgba($terminal-green, 0.3);
+            animation: blink 1s infinite;
+        }
+    }
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}

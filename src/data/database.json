@@ -1,13 +1,13 @@
 {
     "courses": [
         {
-            "name": "CompTIA Security+", 
-            "status": "Not Certified",
-            "vendor": "CompTIA",
-            "instructor": "",
+            "name": "The Complete Python Developler", 
+            "status": "In Progress",
+            "vendor": "uDemy",
+            "instructor": "ZTM Andre Neogi",
             "url": "",
             "date": "",
-            "catgegory": "Defensive"
+            "catgegory": "Development"
         },
         {
             "name": "Node.js",
@@ -35,11 +35,40 @@
     "games": [
         {
             "name": "Whiteout Survival",
-            "Platform": "Mobile Phone"
+            "Platform": "Mobile"
         },
         {
             "name": "Battlefield 6",
             "Platform": "Playstation 5"
+        }
+    ],
+    "navLinks": [
+        {
+            "name": "Home",
+            "path": "/",
+            "id": "1"
+        },
+        {
+            "name": "Archive",
+            "path": "/Archive",
+            "id": "2"
+        },
+        {
+            "name": "Terminal",
+            "path": "/Terminal",
+            "id": "3"
+        }
+    ],
+    "socialLinks": [
+        {
+            "id": 1,
+            "name": "Github",
+            "url": "https://github.com/michael-crowe"
+        },
+        {
+            "id": 2,
+            "name": "LinkedIn",
+            "url": "https://www.linkedin.com/in/michael--crowe"
         }
     ]
 }
