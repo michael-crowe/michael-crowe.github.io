@@ -1,2 +1,39 @@
 @use '../abstract/variables' as *;
 
+.page {
+    display: flex;
+    align-items: center;
+
+    &__left{
+            display: flex;
+            flex-direction: column;
+            align-items:flex-start;
+            padding: 0.5rem 0 0 ; //top left/right bottom
+
+
+        &__intro {
+                color: $cyber-blue;
+                margin-top: 1.5rem;
+                margin-bottom: 1rem;
+                margin-left: 2rem;
+                
+            }  
+        
+        &__header {
+                margin-left: 4rem;
+                margin-bottom: 1rem;
+            }
+
+        &__title {
+                margin-left: 8rem;  
+            }
+
+        &__details {
+                margin-left: 2rem;
+                font-style: italic;
+            }
+
+    }
+    
+}
+

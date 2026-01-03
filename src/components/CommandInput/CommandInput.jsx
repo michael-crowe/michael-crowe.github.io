@@ -28,7 +28,7 @@ const CommandInput = () => {
                     navigate('/terminal')
                     break;
                 case 'help':
-                    console.log("Available: [1 | home], [2 | archive], [3 | terminal] ")
+                    console.log("Available: [1 | cd /home], [2 | cd/ archive], [3 | cd/ terminal], [click on each link]")
                     break;
                 case 'ls':
                     console.log('list out directories')
