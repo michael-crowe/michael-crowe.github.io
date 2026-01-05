@@ -13,13 +13,15 @@ import '/src/assets/styles/main.scss';
 // creating layout component to keep navbar up top
 
 const RootLayout = () => (
-  <>
-  <Navbar />
-  <main className="$bg-charcoal">
-    <Outlet />
-  </main>
-  <CommandInput />
-  </>
+  <div className='app-container'>
+    <Navbar />
+    <main className='main-content'>
+      <Outlet />
+    </main>
+    <CommandInput />
+
+  </div>
+
 
 );
 

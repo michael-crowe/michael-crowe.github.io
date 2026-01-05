@@ -1,44 +1,56 @@
 @use '../abstract/variables' as *;
 
-.prompt {
+.command-bar{
     display: flex;
-    gap: 10px;
-    padding: 1rem;
-    background-color: $bg-charcoal;
-    border-top: 1px solid rgba($terminal-green, 0.2);
     align-items: center;
-
-    &__user {
+    gap: 10px;
+    padding: 1rem 2rem;
+    border: 2px rgba($cyber-blue, 0.2);
+    flex-shrink: 0;
+    
+    &__prompt {
+        display: flex;
+        gap: 4px;
         color: $terminal-green;
+        font-weight: bold;
+        font-family: $code-font, monospace;
     }
+
+    &__user { color: $terminal-green; font-weight: bold; }
+    &__path { color: $cyber-blue };
+    &__symbol { color: #fff };
 
     &__input {
-        background: transparent !important;
-        border: none !important;
-        color: rgba($terminal-green, 0.7);
-        font-family: 'Courier New', monospace;
         flex: 1;
+        background: transparent;
+        border: none;
         outline: none;
+        color: #fff;
+        font-family: $code-font, 'monospace';
         caret-color: $terminal-green;
-        appearance: none;
-        font-size: 1.1rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
+        font-size: 1rem;
+    }
 
-        text-shadow: 0 0 1px rgba($terminal-green, 0.2);
-        caret-color: $terminal-green;
-
-        &:focus{
-            outline: none;
+@keyframes terminal-entry {
+        0% {
+            opacity: 0;
+            transform: translateX(-20px);
+            filter: brightness(2);
         }
-
-        &::placeholder {
-            color: rgba($terminal-green, 0.3);
-            animation: blink 1s infinite;
+        100% {
+            opacity: 1;
+            transform: translateX(0);
+            filter: brightness(1);
         }
     }
-}
 
-@keyframes blink {
-    50% { opacity: 0; }
+@keyframes terminal-flicker {
+    0%, 100% { opacity: 1; transform: skew(0deg); }
+    31% { opacity: 1; transform: skew(0deg); }
+    32% { opacity: 0.8; transform: skew(3deg); filter: hue-rotate(90deg); }
+    33% { opacity: 1; transform: skew(0deg); filter: none; }
+    34% { opacity: 0.9; transform: translateX(2px); }
+    35% { opacity: 1; transform: translateX(0); }
+    }
+    
 }

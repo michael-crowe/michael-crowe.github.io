@@ -27,7 +27,7 @@ const CommandInput = () => {
                 case 'cd /terminal':
                     navigate('/terminal')
                     break;
-                case 'help':
+                case '--help':
                     console.log("Available: [1 | cd /home], [2 | cd/ archive], [3 | cd/ terminal], [click on each link]")
                     break;
                 case 'ls':
@@ -43,7 +43,7 @@ const CommandInput = () => {
                     console.log('have some kind of red alert display')
                     break;
                 default:
-                    console.log('Command not found')
+                    console.log('Use --help for information')
                     break;
             }
             setInput('') // Reset input after command
@@ -51,10 +51,14 @@ const CommandInput = () => {
     };
 
     return (
-        <div className='prompt'>
-            <span className='prompt__user'>guest@crowe-terminal:~$</span>
+        <div className='command-bar'>
+            <div className='command-bar__prompt'>
+                <span className='command-bar__user'>guest@crowe-terminal:</span>
+                <span className='command-bar__path'>~</span>
+                <span className='command-bar__symbol'>$</span>
+            </div>
             <input
-                className='prompt__input' 
+                className='command-bar__input' 
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}

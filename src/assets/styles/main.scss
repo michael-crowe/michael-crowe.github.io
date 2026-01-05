@@ -7,13 +7,39 @@
 // Layout (The Skeleton
 @use '/src/assets/styles/layout/layout';
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-body {
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     background-color: $bg-charcoal;
+}
+
+.main-content {
+    flex: 1; // This pushes the CommandInput to the very bottom
+    display: flex;
+    flex-direction: column;
+    overflow-y:auto;
     color: $terminal-green;
     font-family: $code-font;
-    margin: 0;
-    overflow-x: hidden;
+}
+
+// Ensure your Navbar has the glow line
+.navbar {
+    border-bottom: 1px solid rgba($cyber-blue, 0.3); // Adjust color to your $cyber-blue
+    box-shadow: 0 4px 20px rgba($terminal-green, 0.2);
+    padding: 1rem 2rem;
 }
 
 
