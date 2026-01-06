@@ -28,48 +28,60 @@
             margin-left: 2rem;
             padding-top: 10px;
             font-style: italic;
-        }    
+        }
+
+        &--scanning {
+            padding-top: 20px;
+        }
 
         // --- Interests Animation Logic ---
         .interests-container {
             opacity: 0;
             max-height: 0;
             overflow: hidden;
-            margin-top: 1rem;
-            transition: opacity 0.5s ease max-height 0.8s ease;
+            margin-top: 2rem;
+            transition: opacity 0.5s ease, 
+                        max-height 1s ease;
 
             &--visible {
                 opacity: 1;
                 max-height: 500px;
+                visibility: visible;
+
+                .interests-container--visible-animation-0,
+                .interests-container--visible-animation-1,
+                .interests-container--visible-animation-2,
+                .interests-container--visible-animation-3 {
+                    opacity: 0; // MUST start at 0
+                    display: block;
+                    animation-name: terminal-entry;
+                    animation-duration: 0.5s;
+                    animation-timing-function: ease-out;
+                    animation-fill-mode: forwards; // keeps them visable at 100%
+                    }
+                // apply disticnt staggered delays
+                .interests-container--visible-animation-0 { animation-delay: 0.2s; }
+                .interests-container--visible-animation-1 { animation-delay: 0.7s; }
+                .interests-container--visible-animation-2 { animation-delay: 1.2s; } // 0.6 second gap
+                .interests-container--visible-animation-3 { animation-delay: 1.7s; } // 0.6 second gap
+
 
                 .interests-list{
                     list-style: none;
                     margin-left: 2rem;
+                    padding-left: 0; // Ensure no default padding pushes text right
                 }
+            }
+        }
 
-                
-                [class^="interests-container--visible-animation-"] {
-                    opacity: 0;
-                    animation: terminal-entry 0.5s ease-out forwards;
-                }
-
-                // Apply specific delays to each line for the numbered classes
-                &-animation-1 { animation-delay: 2s; }
-                &-animation-2 { animation-delay: 4s; }
-                &-animation-3 { animation-delay: 6s; }
-
-                // Target the list items inside the visible container
-                // The slide-in effect
-                @keyframes terminal-entry {
-                    0% {
-                        opacity: 0;
-                        transform: translateX(-15px);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translateX(0);
-                    }
-                }
+        @keyframes terminal-entry {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
     }

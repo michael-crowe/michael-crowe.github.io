@@ -50,7 +50,7 @@ const Home = () => {
                 
                 {/* Step 4: The Scanning Line */}
                 {step === 4 && (
-                    <div className='page__left--intro'>                    
+                    <div className='page__left--scanning'>                    
                             <Typewriter 
                                 text="Scanning Interests..." 
                                 typingSpeed={80}
@@ -67,15 +67,15 @@ const Home = () => {
 
                 {/* Step 5 the Results line */}
                 {step === 5 && (
-                    <div className='page__left--intro'>
+                    <div className='page__left--scanning'>
                         <Typewriter
-                            text= "Scan Complete. Found 3 entries:  {Fetching Data...}"
-                            typingSpeed={400}
-                            startDelay={500}
+                            text= "[OK] Scan Complete. Found 3 entries:  {Fetching Data...}"
+                            typingSpeed={100}
+                            startDelay={1000}
                             onComplete={() => {
                                 setTimeout(() => {
                                     setStep(6)
-                                },2000)
+                                },1000)
                             }}
                         />
                     </div>
@@ -84,7 +84,7 @@ const Home = () => {
                 {/* Step 6: The Interests Lists */}
                 <div className={`interests-container ${step >= 6 ? 'interests-container--visible' : ''}`}>
                     <div className='page__left--details'>
-                        <p className='terminal-path'>├── Interests/ </p>
+                        <p className='interests-container--visible-animation-0'>├── Interests/ </p>
                         <ul className='interests-list'>
                             <li className='interests-container--visible-animation-1'>├── Cyber Security</li>
                             <li className='interests-container--visible-animation-2'>├── Web Development</li>
