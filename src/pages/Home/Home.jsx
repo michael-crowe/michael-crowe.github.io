@@ -13,24 +13,23 @@ const Home = () => {
     return (
         <main className="page">
             <div className='page__left'>
-
                 {/* Line 1 */}
                 <div className='page__left--intro'>
                     {step >= 1 && (
                         <Typewriter
                         text="_hi my name is" 
-                        delay={100}
+                        typingSpeed={100}
                         onComplete={() => setStep(2)}
                         
                         />
                     )}
                 </div>
                 {/* Line 2 */}
-                <div className='page__left--header'>
+                <div className='page__left--name'>
                     {step >= 2 && (
                         <Typewriter 
                             text="Michael Crowe" 
-                            delay={90} 
+                            typingSpeed={90} 
                             startDelay={700}
                             onComplete={() => setStep(3)}
                         />
@@ -42,44 +41,58 @@ const Home = () => {
                         <Typewriter
                         className=""
                             text="[Cyber Security Professional] && [Junior Developer]" 
-                            delay={80} 
+                            typingSpeed={80} 
                             startDelay={1000}
                             onComplete={() => setStep(4)}
                         />
                     )}
                 </div>
-
+                
                 {/* Step 4: The Scanning Line */}
                 {step === 4 && (
+                    <div className='page__left--intro'>                    
+                            <Typewriter 
+                                text="Scanning Interests..." 
+                                typingSpeed={80}
+                                startDelay={1000}
+                                onComplete={() => {
+                                    // Wait 1 second after typing finishes, then show the list
+                                    setTimeout(() => {
+                                        setStep(5)
+                                    }, 1800)
+                                }} 
+                            />
+                        </div>
+                )}
+
+                {/* Step 5 the Results line */}
+                {step === 5 && (
                     <div className='page__left--intro'>
-                        <Typewriter 
-                            text="Scanning Interests..." 
-                            delay={80}
-                            startDelay={1000}
+                        <Typewriter
+                            text= "Scan Complete. Found 3 entries:  {Fetching Data...}"
+                            typingSpeed={400}
+                            startDelay={500}
                             onComplete={() => {
-                                // Wait 1 second after typing finishes, then show the list
                                 setTimeout(() => {
-                                    setStep(5);
-                                }, 1200)
-                            }} 
+                                    setStep(6)
+                                },2000)
+                            }}
                         />
                     </div>
                 )}
 
-                {/* Step 5: The Final List */}
-                <div className={`interests-container ${step >= 5 ? 'interests-container--visible' : ''}`}>
+                {/* Step 6: The Interests Lists */}
+                <div className={`interests-container ${step >= 6 ? 'interests-container--visible' : ''}`}>
                     <div className='page__left--details'>
-                        <p className='terminal-prompt'>
-                            <span className='success-text'>[ OK ]</span> Scan Complete. Found 3 entries:
-                        </p>
-                        <p>├── Interests/ </p>
-                        <ul className='page__left--no-buttlet-list'>
-                            <li className='page__left--link-item'>├── Cyber Security</li>
-                            <li className='page__left--link-item'>├── Web Development</li>
-                            <li className='page__left--link-item'>└── AI Development & Engineering (Learning)</li>
+                        <p className='terminal-path'>├── Interests/ </p>
+                        <ul className='interests-list'>
+                            <li className='interests-container--visible-animation-1'>├── Cyber Security</li>
+                            <li className='interests-container--visible-animation-2'>├── Web Development</li>
+                            <li className='interests-container--visible-animation-3'>└── AI Development & Engineering (Learning)</li>
                         </ul>
                     </div>
                 </div>
+
             </div>
 
             <div className='page__right'>
@@ -89,8 +102,6 @@ const Home = () => {
                         className='page__right--logo'
                     />
             </div>
-
-
         </main>
     )    
 }

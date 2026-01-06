@@ -5,63 +5,75 @@
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
+    gap: 2rem;
+    padding: 2rem;;
 
     &__left {
         flex: 1;
         flex-direction: row;
         align-items: flex-start;
+        min-width: 0;
         padding-top: 4rem;
 
-        &--intro, &--header, &title {
-            margin-bottom: 0.25rem;
-        }    
+        &--intro {
+           color: $cyber-blue;
+        }
 
-        &--details {
-            margin-top: 2rem;
+        &--name {
+            margin-left: 1rem;
+            padding-top: 10px;
+        }
+
+        &--title {
             margin-left: 2rem;
-        }
-
-        &--no-buttlet-list {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        &--link-item {
-            margin-left: 2.5rem;
-            color: $terminal-green;
-            opacity: 0; // Hidden until the animation triggers
-
-            &::first-letter {
-                opacity: 0.5;
-            }
-        }
+            padding-top: 10px;
+            font-style: italic;
+        }    
 
         // --- Interests Animation Logic ---
         .interests-container {
-            margin: 0;
-            padding: 0;
             opacity: 0;
-            pointer-events: none;
-            transform: translateY(10px);
-            transition: opacity 0.8s ease-in-out, transform 0.6s ease-out;
+            max-height: 0;
+            overflow: hidden;
+            margin-top: 1rem;
+            transition: opacity 0.5s ease max-height 0.8s ease;
 
             &--visible {
                 opacity: 1;
-                pointer-events: auto;
-                margin-top: 2rem;
-                transform: opacity 0.6s ease-in;
+                max-height: 500px;
 
-                // Trigger staggered entry for the list items
-                .page__left--link-item {
-                    animation: terminal-entry 0.4s ease-out forwards;
+                .interests-list{
+                    list-style: none;
+                    margin-left: 2rem;
+                }
 
-                    &:nth-child(1) { animation-delay: 0.2s; }
-                    &:nth-child(2) { animation-delay: 0.4s; }
-                    &:nth-child(3) { animation-delay: 0.6s; }
+                
+                [class^="interests-container--visible-animation-"] {
+                    opacity: 0;
+                    animation: terminal-entry 0.5s ease-out forwards;
+                }
+
+                // Apply specific delays to each line for the numbered classes
+                &-animation-1 { animation-delay: 2s; }
+                &-animation-2 { animation-delay: 4s; }
+                &-animation-3 { animation-delay: 6s; }
+
+                // Target the list items inside the visible container
+                // The slide-in effect
+                @keyframes terminal-entry {
+                    0% {
+                        opacity: 0;
+                        transform: translateX(-15px);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
                 }
             }
         }
     }
+
 
 
     &__right {
@@ -69,32 +81,33 @@
         display: flex;
         justify-content: flex-end;
 
-        &--logo {
-            width: 400px;
-            height: auto;
-            margin-right: 2rem;
-            animation: terminal-flicker 8s infinite;
+            &--logo {
+                width: 400px;
+                height: auto;
+                margin-right: 2rem;
+                animation: terminal-flicker 8s infinite;
+            }
         }
-    }
 
 
-// --- Global Animations & Utility Classes ---
+    // --- Global Animations & Utility Classes ---
 
-.typing-cursor {
-        border-right: 10px solid $terminal-green;
-        padding-right: 2px;
-        animation: blink 0.7s step-end infinite;
-    }
+    .typing-cursor {
+            border-right: 10px solid $terminal-green;
+            padding-right: 2px;
+            animation: blink 0.7s step-end infinite;
+        }
 
-.success-text {
-        color: $terminal-green;
-        font-weight: bold;
-        margin-right: 8px;
-    }
+    .success-text {
+            color: $terminal-green;
+            font-weight: bold;
+            margin-right: 8px;
+            margin-top: 1rem;
+        }
 
-@keyframes blink {
-        from, to { border-color: transparent; }
-        50% { border-color: $terminal-green; }
-    }
+    @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: $terminal-green; }
+        }
 
 }

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const Typewriter = ({text, delay=50, startDelay=0, onComplete, className}) => {
+const Typewriter = ({text, // the text to 'type'
+                    typingSpeed=50, //typing speed
+                    startDelay=0, //the time to start typing
+                    onComplete, 
+                    className}) => {
     const [currentText, setCurrentText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isStarted, setIsStarted] = useState(false);
@@ -23,7 +27,7 @@ const Typewriter = ({text, delay=50, startDelay=0, onComplete, className}) => {
             const timeout = setTimeout(() => {
                 setCurrentText((prev) => prev + text[currentIndex]);
                 setCurrentIndex((prev) => prev + 1);
-            }, delay);
+            }, typingSpeed);
 
             return () => clearTimeout(timeout);
         } else {
@@ -31,7 +35,7 @@ const Typewriter = ({text, delay=50, startDelay=0, onComplete, className}) => {
             setIsFinished(true);
             if (onComplete) onComplete();
         }
-    }, [currentIndex, delay, text, isStarted, isFinished, onComplete]);
+    }, [currentIndex, typingSpeed, text, isStarted, isFinished, onComplete]);
 
     // The cursor only shows if the typing started AND is not finished
     const cursorClass = (isStarted && !isFinished) ? 'typing-cursor' : '';

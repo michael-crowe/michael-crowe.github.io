@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import "/src/assets/styles/components/_commandInput.scss"
 
 const CommandInput = () => {
     const [input, setInput ] = useState('');
+    const [history, setHistory] = useState([]); //stores previous commands
     const navigate = useNavigate();
-    const location = useLocation();
+    const inputRef = useRef(null);
+    const historyEndRef = useRef(null);
+    
+    const scrollToBottom = () => {
+        historyEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [history]);
 
     const handleCommand = (e) => {
-        if (e.key == 'Enter') {
-            const command = input.toLowerCase().trim();
 
-            //Logic for navigation based on user input
-            switch (command) {
+        if (e.key == 'Enter') {
+
+            const commandText = input.trim();
+            if(!commandText) return;
+
+            let responseText = ""; // Initialize the response string
+            const lowerCommand = commandText.toLowerCase();
+
+            switch (lowerCommand) {
                 case '1':
                 case 'cd /home':
                 case 'cd ~':
@@ -31,44 +46,68 @@ const CommandInput = () => {
                     console.log("Available: [1 | cd /home], [2 | cd/ archive], [3 | cd/ terminal], [click on each link]")
                     break;
                 case 'ls':
-                    console.log('list out directories')
+                    console.log('list out directories');
                     break;
                 case 'whoami':
                     console.log('print guest@crowe-terminal');
                     break;
                 case 'pwd':
-                    console.log('print current URL')
+                    responseText = window.location.hash.replace('#', '') || "/home"
                     break;
                 case 'root':
-                    console.log('have some kind of red alert display')
+                    console.log('have some kind of red alert display');
                     break;
+                case 'clear':
+                    setHistory([]);
+                    setInput('');
+                    return;
                 default:
-                    console.log('Use --help for information')
+                    responseText = `Command not found: {commandText}. Type --help for info.`;
                     break;
             }
-            setInput('') // Reset input after command
+
+            setHistory((prev) => [...prev, { 
+                command: commandText, 
+                response:responseText 
+            }]);
+
+            setInput(''); // Reset input after command
         }
     };
 
     return (
-        <div className='command-bar'>
-            <div className='command-bar__prompt'>
-                <span className='command-bar__user'>guest@crowe-terminal:</span>
-                <span className='command-bar__path'>~</span>
-                <span className='command-bar__symbol'>$</span>
+        <section className='terminal-shell'>
+            <div className='terminal-shell__history'>
+                {history.map((entry, index) => (
+                    <div key={index} className='history-group'>
+                        <div className='history-line'>
+                            <span className='prompt-label'>guest@crowe-terminal:~$</span>
+                            <span className='history-text'>{entry.command}</span>
+                        </div>
+                        {entry.response && (
+                            <div className='response-line'>{entry.response}</div>
+                        )}
+                    </div>
+                ))}
+                <div ref={historyEndRef} /> {/* Invisible anchor for scrolling */}
             </div>
-            <input
-                className='command-bar__input' 
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleCommand}
-                placeholder='_'
-                autoFocus
-                autoComplete='off'
-                spellCheck='false'
-            />
-        </div>
+            <div className='terminal-shell__input-container'>
+                <span className='prompt-label'>guest@crowe-terminal:~$</span>
+                <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleCommand}
+                    className='active-input'
+                    placeholder='_'
+                    autoFocus
+                    autoComplete='off'
+                    spellCheck='false'
+                />
+            </div>
+        </section>
+
     );
 };
 

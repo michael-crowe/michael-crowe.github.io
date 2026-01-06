@@ -1,56 +1,76 @@
 @use '../abstract/variables' as *;
 
-.command-bar{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 1rem 2rem;
-    border: 2px rgba($cyber-blue, 0.2);
+.terminal-shell {
+    width: 100%;
+    background-color: #1a1a1a; // Darker terminal background
+    font-family: $code-font, monospace;
     flex-shrink: 0;
-    
-    &__prompt {
-        display: flex;
-        gap: 4px;
-        color: $terminal-green;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    //to keep history from taking over the whole screen
+    height: 30vh;
+
+    //to allow the history to scroll internally
+    overflow-y: hidden;
+
+    .prompt-label {
+        color: $terminal-green; // Classic terminal green
+        margin-right: 10px;
         font-weight: bold;
-        font-family: $code-font, monospace;
     }
 
-    &__user { color: $terminal-green; font-weight: bold; }
-    &__path { color: $cyber-blue };
-    &__symbol { color: #fff };
-
-    &__input {
+    &__history {
+        display: flex;
         flex: 1;
-        background: transparent;
-        border: none;
-        outline: none;
-        color: #fff;
-        font-family: $code-font, 'monospace';
-        caret-color: $terminal-green;
-        font-size: 1rem;
-    }
+        flex-direction: column;
+        margin-bottom: 10px;
+        overflow-y: auto;
 
-@keyframes terminal-entry {
-        0% {
-            opacity: 0;
-            transform: translateX(-20px);
-            filter: brightness(2);
+        .history-group {
+            margin-bottom: 5px;
         }
-        100% {
-            opacity: 1;
-            transform: translateX(0);
-            filter: brightness(1);
+
+        .history-text { color: #fff; }
+        .response-line {
+            color: $terminal-green;
+            margin-left: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.9;
         }
     }
 
-@keyframes terminal-flicker {
-    0%, 100% { opacity: 1; transform: skew(0deg); }
-    31% { opacity: 1; transform: skew(0deg); }
-    32% { opacity: 0.8; transform: skew(3deg); filter: hue-rotate(90deg); }
-    33% { opacity: 1; transform: skew(0deg); filter: none; }
-    34% { opacity: 0.9; transform: translateX(2px); }
-    35% { opacity: 1; transform: translateX(0); }
+    &__input-container {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        padding: 5px 10px;
+        background: rgba(0, 0, 0, 0.3);
+        
+        // --- Green Glow ---
+        border: 1px solid rgba(76, 175, 80, 0.4);
+        box-shadow: 
+            inset 
+                0 0 5px rgba(76, 175, 80, 0.2),
+                0 0 10px rgba(76, 175, 80, 0.3),
+                0 0 20px rgba(75, 175, 80, 0.1);
+
+        border-radius: 4px;
+
+        .active-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-family: inherit;
+            font-size: 1rem;
+            caret-color: $terminal-green; // Green blinking 
+            
+            &::placeholder {
+                color: rgba(76, 175, 80, 0.3);
+            }
+        }
     }
-    
 }
