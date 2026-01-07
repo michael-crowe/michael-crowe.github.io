@@ -6,17 +6,20 @@
     align-items: flex-start;
     width: 100%;
     gap: 2rem;
-    padding: 2rem;;
+
 
     &__left {
         flex: 1;
         flex-direction: row;
         align-items: flex-start;
         min-width: 0;
-        padding-top: 4rem;
+        padding-top: 8rem;
+        margin-left: 2rem;
 
         &--intro {
            color: $cyber-blue;
+           letter-spacing: 0.5px;
+           white-space: nowrap;
         }
 
         &--name {
@@ -91,13 +94,45 @@
     &__right {
         flex: 1;
         display: flex;
-        justify-content: flex-end;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
             &--logo {
                 width: 400px;
                 height: auto;
-                margin-right: 2rem;
+                margin-bottom: 1rem;
                 animation: terminal-flicker 8s infinite;
+            }
+
+            &--credits {
+                margin-left: 1rem;
+                font-family: $main-font;
+                font-size: 0.75rem;
+                color: rgba($cyber-blue, 0.6);
+                text-align: center;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                animation: simpleFade 2s ease-in;
+                text-shadow: 0 0 5px rgba($terminal-green, 0.3);
+                transition: all 0.3s ease;
+
+                &:hover {
+                    color: rgba($cyber-blue, 1);
+                    text-shadow: 0 0 8px rgba($terminal-green, 0.6);
+                }
+            }
+
+            .divider {
+                color: $terminal-green;
+                margin: 0.3rem 0;
+                font-weight: bold;
+                opacity: 0.8;
+            }
+
+            .highlight {
+                color: $terminal-green;
+                font-weight: bold;
             }
         }
 
