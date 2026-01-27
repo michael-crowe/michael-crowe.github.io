@@ -5,6 +5,10 @@ html, body {
     padding: 0;
     width: 100%;
     //prevents horizontal scroll if emelemts accidently pokes out
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: $bg-charcoal;
+}
+
+.root {
+    height: 100%
 }

@@ -126,9 +126,10 @@
         color: $terminal-green;
         line-height: 1.4;
         font-size: clamp(0.85rem, 3vw, 1rem);
+        overflow-y: auto;
 
         //prevent 'jumping' page
-        height: 350px;
+        max-height: 60vh;
         overflow-y: auto; //creates the terminal-style scrolling
         scrollbar-width: thin;
         scrollbar-color: $terminal-green-glow transparent;
@@ -136,7 +137,12 @@
         //Chrome/Safari Webkit
         &::-webkit-scrollbar {
             width: 6px;
-        } overflow-y: scroll;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba($terminal-green, 0.2);
+            border-radius: 10px;
+        }
 
         //desktop
         @include respond-to("desktop") {

@@ -6,34 +6,29 @@
 .home {
   display: flex;
   flex-direction: column;
-  @include full-height;
+  // Use calc to subtract the navbar height (approx 130px)
+  // This prevents the page from being taller than the screen
+  height: calc(100vh - 130px); 
+  height: calc(100dvh - 130px); // Modern mobile fix
+  
   width: 100%;
+  overflow: hidden; // This explicitly disables vertical and horizontal scrolling
+  
   padding: 1.5rem;
   box-sizing: border-box;
-
-  background-color: $bg-charcoal;
-  color: $terminal-green;
-  gap: 3rem;
-
-  overflow-x: hidden;
-
-  @include respond-to("tablet") {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      align-items: start;
-      align-content: center;
-      padding: 0 10%;
-      gap: 4rem;
-  }
 
   @include respond-to("desktop") {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    align-items: center;
+    align-items: center; 
+    align-content: center;
+    padding: 0 10%;
+    gap: 4rem;
     
-    height: 100vh;
-    overflow: hidden;
+    // Extra safety for 1920x1080 screens
+    max-height: calc(100vh - 130px);
   }
+
   
   &__contnent, &__visual {
 
@@ -137,35 +132,27 @@
 
   //Visual Section (Logo & Credits)
   &__visual {
-    display: flex;
+display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
-    text-align: center;
-    padding: 2rem 0;
-
-    margin-top: 0;
+    margin: 0; // Remove all margins
 
     @include respond-to("desktop") {
-      padding-top: 2.5rem;
-      align-self: flex-start;
+      padding-top: 4rem;
+      align-self: start;
     }
   }
 
-  &__logo {
+&__logo {
     width: 100%;
-    max-width: 180px;
+    max-width: 200px; // Mobile
     height: auto;
-    filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.15));
-    object-fit: contain;
-
-    @include respond-to("tablet") {
-      max-width: 300px;
-    }
+    filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.2));
 
     @include respond-to("desktop") {
-      max-width: 350px;
+      max-width: 380px; // Desktop (Balanced)
     }
   }
 
