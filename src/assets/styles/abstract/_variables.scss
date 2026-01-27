@@ -1,18 +1,43 @@
 // Cyber Security Theme Colors
-
 $bg-charcoal: #2C2C2E; // Charcoal color
 $terminal-green: #00ff41; // Classic Matrix Green color
+$terminal-green-glow: rgba(0, 255, 65, 0.5);
 $cyber-blue: #00d4ff; // Electric Neon Blue
 $alert-red: #ff3e3e; // Security Breach red
 $dark-gray: #1a1a1a; // Card background
+$dark-gray-header: #0a0a0a; //used in terminal
 
 // Fonts - Monospoace is key for the "Security" feel
 $code-font: 'Fria Code', 'Courier New', monospace;
 $main-font: 'Inter', sans-serif;
 
 // Effects
-$neon-glow: 0 0 10px rgba(0, 255, 65, 0.5);
+$neon-glow: 0 0 10px $terminal-green-glow;
 $border-glow: 15px solid $terminal-green;
+
+//Images
+$img-path: "/src/assets/images";
+
+$bg-image: "#{$img-path}/background.png";
+$home_logo: "#{$img-path}/mike_logo.png";
+
+// Cyber Window Controls (Electric Palette)
+$window-red: #ff5555;    // Neon Coral
+$window-yellow: #f1fa8c; // Laser Lemon
+$window-green: #50fa7b;  // Matrix Lime (Matches terminal green but brighter)
+
+//Terminal Variables
+
+// Terminal Icon Paths (Material/Lucide Style)
+$icon-path-close: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z";
+$icon-path-maximize: "M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z";
+$icon-path-minimize: "M19 13H5v-2h14v2z";
+
+// Terminal Design Variables
+
+// Neon Border for the terminal shell
+$terminal-border: rgba($terminal-green, 0.2);
+// Uses $dark-gray, $terminal-green, $terminal-green-glow, $code-font, $window-red $window-yellow, $$window-green
 
 
 // React Icons
@@ -21,3 +46,11 @@ $border-glow: 15px solid $terminal-green;
     font-size: 1.5rem;
     padding: 0;
 }
+
+//Break points
+// Breakpoints
+$breakpoint-sm: 576px;   // Landscape phones
+$breakpoint-md: 768px;   // Tablets
+$breakpoint-lg: 1024px;  // Laptops / Desktops
+$breakpoint-xl: 1440px;  // Large Desktops
+$breakpoint-xxl: 1800px; // Ultra-wide monitors

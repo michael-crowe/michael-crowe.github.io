@@ -1,136 +1,114 @@
-import React, { useState, useEffect } from 'react'
-
-import '/src/assets/styles/pages/_home.scss';
-import myLogo from '/src/assets/images/mike_logo.png'
-import Typewriter from '/src/components/Typewriter/Typewriter'
-
+import React, { useState } from "react";
+import '/src/pages/Home/_home.scss';
+import logo from '/src/assets/images/mike_logo.png';
+import TypeWriter from '/src/components/Typewriter/Typewriter';
+import Terminal from '/src/components/Terminal/Terminal';
 
 const Home = () => {
     const [step, setStep] = useState(1);
 
+    const getTimeStamp = () => {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        return `[ ${hours}:${minutes}:${seconds} ]`;
 
-    const getTimestamp = () => {
-            const now = new Date();
-            const hours = now.getHours().toString().padStart(2, '0');
-            const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
-
-            return `[ ${hours}:${minutes}:${seconds} ]`;
-        };
+    };
 
     return (
-        <main className="page">
-
-            <div className='page__left'>
-                {/* Line 1 */}
-            <div className='page__left--intro'>
-                {step >= 1 && (
-                    <> {/* Wrap multiple components in a fragment */}
-                        {/* Component 1: Prints time stamp very fast */}
-                        <Typewriter
-                            text={getTimestamp()}
-                            typingSpeed={60} // Fast burst for the timestamp
-                            hideCursor={true}
-                            onComplete={() => setTimeout(() => setStep(2), 1000)}
-                        />
-                        {/* Component 2: Prints the system message */}
-                        {step >= 2 && (
-                        <Typewriter
-                            text=' [system_msg]: "Hello World" >> _hi, my name is'
-                            typingSpeed={70} 
-                            onComplete={() => setStep(3)}
-                        />
+        <main className="home">
+            <section className="home__content">
+                <Terminal>
+                    <div className="home__terminal-logic">
+                        {/*Step 1 & 2: Timestamp & system message */}
+                        {step >= 1 && (
+                            <div className="home__terminal-line">
+                                <TypeWriter
+                                    text={getTimeStamp()}
+                                    typingSpeed={60}
+                                    hideCursor={true}
+                                    onComplete={() => setTimeout(() => setStep(2), 1000)}
+                                />
+                                {step >=2 && (
+                                    <TypeWriter
+                                        text='[system_msg]: "Hello World" >> _hi, my name is'
+                                        typingSpeed={70}
+                                        onComplete={() => setStep(3)} 
+                                    />
+                                )}
+                            </div>
                         )}
-                    </>
-                )}
-            </div>
-
-                {/* Line 3 */}
-                <div className='page__left--name'>
-                    {step >= 3 && (
-                        <Typewriter 
-                            text="Michael Crowe" 
-                            typingSpeed={90} 
-                            startDelay={700}
-                            onComplete={() => setStep(4)}
-                        />
-                    )}
-                </div>
-                {/* Line 4 */}
-                <div className='page__left--title'>
-                    {step >= 4 && (
-                        <Typewriter
-                        className=""
-                            text="[Cyber Security Professional] && [Junior Developer]" 
-                            typingSpeed={80} 
-                            startDelay={1000}
-                            onComplete={() => setStep(5)}
-                        />
-                    )}
-                </div>
-                
-                {/* Step 5: The Scanning Line */}
-                {step === 5 && (
-                    <div className='page__left--scanning'>                    
-                            <Typewriter 
-                                text="Scanning Interests..." 
-                                typingSpeed={80}
-                                startDelay={1000}
-                                onComplete={() => {
-                                    setTimeout(() => {
-                                        setStep(6)
-                                    }, 1800)
-                                }} 
-                            />
+                        {/* Step 3: Name */}
+                        {step >=3 && (
+                            <h1 className="home__name">
+                                <TypeWriter 
+                                    text="Michael Crowe"
+                                    typingSpeed={90}
+                                    startDelay={700}
+                                    onComplete={() => setStep(4)}
+                                />
+                            </h1>
+                        )}
+                        {/*Step 4: Title */}
+                        {step >= 4 && (
+                            <div className="home__title">
+                                <TypeWriter 
+                                    text='[Cyber Security Professional] && [Junior Developer]'
+                                    typingSpeed={80}
+                                    startDelay={1000}
+                                    onComplete={() => setStep(5)}
+                                />
+                            </div>
+                        )}
+                        {/*Step 5 and 6: Scanning Status */}
+                        {(step === 5 || step === 6 ) && (
+                            <div className="home__status">
+                                <TypeWriter
+                                    key={step}
+                                    text={step === 5 ? "Scanning Interests..." : "[OK] Scanning Complete. Found 5 entries: {Fetching Data...}"}
+                                    typingSpeed={100}
+                                    onComplete={() => {
+                                        if (step === 5) {
+                                            setTimeout(() => setStep(6), 2000);
+                                        } else if (step === 6) {
+                                            setTimeout(() => setStep(7), 1500); //trigger the list
+                                        }
+                                    }}
+                                />
+                            </div>
+                        )}
+                        {/* Step 7: Interests List */}
+                        <div className={`home__interests ${step === 7 ? 'home__interests--active' : ''}`}>
+                            <p className="home__interests-root">├── Interests/</p>
+                            <ul className="home__interests-list">
+                                <li className="home__interests-item">├── Cyber Security</li>
+                                <li className="home__interests-item">├── Programming</li>
+                                <li className="home__interests-item">├── Web Development</li>
+                                <li className="home__interests-item">├── AI Development</li>
+                                <li className="home__interests-item">└── AI Engineering</li>
+                            </ul>
                         </div>
-                )}
-
-                {/* Step 6 the Results line */}
-                {step === 6 && (
-                    <div className='page__left--scanning'>
-                        <Typewriter
-                            text= "[OK] Scan Complete. Found 3 entries:  {Fetching Data...}"
-                            typingSpeed={100}
-                            startDelay={1000}
-                            onComplete={() => {
-                                setTimeout(() => {
-                                    setStep(8)
-                                },1000)
-                            }}
-                        />
                     </div>
-                )}
+                </Terminal>
+            </section>
 
-                {/* Step 7: The Interests Lists */}
-                <div className={`interests-container ${step >= 8 ? 'interests-container--visible' : ''}`}>
-                    <div className='page__left--details'>
-                        <p className='interests-container--visible-animation-0'>├── Interests/ </p>
-                        <ul className='interests-list'>
-                            <li className='interests-container--visible-animation-1'>├── Cyber Security</li>
-                            <li className='interests-container--visible-animation-2'>├── Web Development</li>
-                            <li className='interests-container--visible-animation-3'>└── AI Development & Engineering (Learning)</li>
-                        </ul>
-                    </div>
+            {/*Visual Side (Logo and Credits for myself and Gemini for making the logo with my ideas) */}
+            <section className="home__visual">
+                <img 
+                    src={logo}
+                    alt='Cyber Dev Logo'
+                    className='home__logo'
+                />
+                <div className="home__credits">
+                    <p>Engineered by <span className="highlight">Human Intent</span></p>
+                    <div className='divider'>//</div>
+                    <p>Augmented by <span className="highlight">Gemini AI</span></p>
                 </div>
 
-            </div>
-
-            <div className='page__right'>
-                    <img 
-                        src= {myLogo}
-                        alt="Cyber Dev Logo"
-                        className='page__right--logo'
-                    />
-
-                    <div className='page__right--credits'>
-                        <p>Engineered by <span className='highlight'>Human Intent</span></p>
-                        <div className='divider'>//</div>
-                        <p>Augmented by <span className='highlight'>Gemini AI</span></p>
-
-                    </div>
-            </div>
+            </section>
         </main>
-    )    
-}
+    );
+};
 
 export default Home;

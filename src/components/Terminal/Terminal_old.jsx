@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import "/src/assets/styles/components/_commandInput.scss"
 
-const CommandInput = () => {
+const TerminalInput = () => {
     const [input, setInput ] = useState('');
     const [history, setHistory] = useState([]); //stores previous commands
     const navigate = useNavigate();
@@ -111,4 +110,4 @@ const CommandInput = () => {
     );
 };
 
-export default CommandInput
+export default TerminalInput

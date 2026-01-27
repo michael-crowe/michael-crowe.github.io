@@ -1,5 +1,5 @@
 import React from 'react';
-import '/src/assets/styles/components/_navbar.scss'
+import '/src/components/Navbar/_navbar.scss'
 import { NavLink } from 'react-router-dom';
 
 import {navLinks, socialLinks} from '/src/data/database.json'

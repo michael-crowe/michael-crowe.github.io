@@ -1,0 +1,10 @@
+@use '../abstract/variables' as *;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    //prevents horizontal scroll if emelemts accidently pokes out
+    overflow-x: hidden;
+    background-color: $bg-charcoal;
+}

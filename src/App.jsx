@@ -1,11 +1,12 @@
 import { createHashRouter,  RouterProvider, Outlet} from 'react-router-dom';
-import React, { Children } from 'react';
 import Navbar from './components/Navbar/Navbar';
-import CommandInput from './components/CommandInput/CommandInput';
 
+//Pages
 import Home from './pages/Home/Home';
 import Archive from './pages/Archive/Archive';
-import Terminal from './pages/Terminal/Terminal';
+
+//Components
+import Terminal from './components/Terminal/Terminal';
 
 import '/src/assets/styles/main.scss';
 
@@ -18,8 +19,6 @@ const RootLayout = () => (
     <main className='main-content'>
       <Outlet />
     </main>
-    <CommandInput />
-
   </div>
 
 

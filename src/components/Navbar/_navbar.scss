@@ -1,0 +1,102 @@
+@use '../../assets/styles/abstract/variables' as *;
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: $bg-charcoal;
+    color: $terminal-green;
+    padding: 1rem 2rem;
+    position: relative;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba($terminal-green, 0.1);
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, $terminal-green, transparent);
+        opacity: 0.2;
+    }
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    &__brand{
+        font-family: $code-font;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        text-shadow: 0 0 10px rgba($terminal-green, 0.3);
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.3rem; //vertical spacing for list
+        
+        .navbar__permissions {   //for the span in the links to apply permissions like linux
+            display: inline-block;
+            width: 45px;
+            color: rgba($terminal-green, 0.4);
+            font-size: 0.85rem;
+            font-family: $code-font;
+        }
+
+    }
+
+    &__link{
+        text-decoration: none;
+        color: $terminal-green;
+        font-family: $code-font;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0.8;
+
+        &:hover, &.active {
+            color: $neon-glow;
+            text-shadow: 0 0 5px $terminal-green,
+                         0 0 15px rgba($terminal-green, 0.5);
+            transform: translateX(3px); //subtle 'push' effect on hover
+
+        }
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+    }
+
+
+    &__social-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        a {
+            color: $terminal-green;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+
+            a:hover {
+                color: $neon-glow;
+                filter: drop-shadow(0 0 5px $terminal-green);
+            }
+        }
+    }
+}

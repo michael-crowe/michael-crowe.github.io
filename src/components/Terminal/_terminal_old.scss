@@ -1,0 +1,50 @@
+.terminal-shell {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 5%;
+  font-family: $code-font;
+
+  &__status {
+    color: $terminal-green;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: $terminal-green;
+      border-radius: 50%;
+      box-shadow: 0 0 8px $terminal-green;
+    }
+  }
+
+  &__input-zone {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 20px;
+    border: 1px solid rgba($terminal-green, 0.2);
+    border-radius: 4px;
+
+    label {
+      color: $terminal-green;
+      margin-right: 10px;
+    }
+
+    input {
+      background: transparent;
+      border: none;
+      color: #fff;
+      outline: none;
+      width: 300px;
+      font-family: inherit;
+    }
+  }
+}

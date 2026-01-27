@@ -1,0 +1,20 @@
+@use './variables' as *;
+
+//Values for different screens to assure site is visual pleasing on all devices
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "tablet" {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == "desktop" {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == "large-desktop" {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == "ultra-wide" {
+    @media (min-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+@mixin full-height {
+  min-height: 100vh; /*the fall back for older browsers */
+  min-height: 100dvh; /* Modern standard  */
+}

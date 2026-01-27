@@ -1,0 +1,159 @@
+@use 'sass:color'; //needs to be at the very top
+
+@use '../../assets/styles/abstract/variables' as *;
+@use '../../assets/styles/abstract/mixins' as *;
+
+
+.terminal {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden; //keeps corners rounded
+    position: relative;
+    background-color: $dark-gray;
+    border: 1px solid $terminal-border;
+    border-radius: 8px;
+    
+    font-family: $code-font;
+    box-shadow: 0 10 35px rgba(0, 0, 0, 0.6);
+
+    //Map Sass variables to CSS variables
+    --path-close: #{$icon-path-close};
+    --path-maximize: #{$icon-path-maximize};
+    --path-minimize: #{$icon-path-minimize};
+
+    &__header {
+        display: grid;
+        grid-template-columns: 80px 1fr 80px;
+        align-items: center;
+        background-color: color.adjust($dark-gray, $lightness: -5%);
+        padding: 0.6rem 1rem;
+        gap: 10px;
+
+        grid-template-columns: auto 1fr;
+
+        @include respond-to("tablet") {
+            grid-template-columns: 80px 1fr 80px;
+            &::after {
+                content: "";
+                width: 80px;
+            }
+        }
+
+        svg {
+            opacity: 1;
+
+            @media (hover: hover) {
+                opacity: 0;
+                transition: opactiy 0.2s ease;
+            }
+
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+        }
+
+        &:hover svg {
+            opacity: 1;
+        }     
+    }
+
+    &__dots {
+        display: flex;
+        gap: 8px;
+    }
+
+
+    &__dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &--red {
+            background-color: $window-red;
+            box-shadow: 0px, 0px, 8px rgba($bg-charcoal, 0.4); //subtle glow
+            &:hover { background-color: rgba($window-red, 0.15); }
+        }
+        &--yellow {
+            background-color: $window-yellow;
+            box-shadow: 0px, 0px, 8px rgba($bg-charcoal, 0.4); //subtle glow
+            &:hover { background-color: rgba($window-yellow, 0.15); }
+        }
+        &--green {
+            background-color: $window-green;
+            box-shadow: 0px, 0px, 8px rgba($bg-charcoal, 0.4); //subtle glow
+            &:hover { background-color: rgba($window-green, 0.15); }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 3px;
+            width: 4px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+    }
+
+    &__title {
+        color: #666;
+        font-size: 0.75rem;
+        font-family: $code-font;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; // Adds '...' if the name is too long
+
+        @include respond-to("tablet") {
+            font-size: 0.75rem;
+            text-align: center;
+        }
+    }
+
+    &::after {
+        content: "";
+        width: 80px; //matches the width of the dots container
+    }
+
+    &__body {
+        flex-grow: 1;
+        padding: 1.2rem 1.2rem;
+        color: $terminal-green;
+        line-height: 1.4;
+        font-size: clamp(0.85rem, 3vw, 1rem);
+
+        //prevent 'jumping' page
+        height: 350px;
+        overflow-y: auto; //creates the terminal-style scrolling
+        scrollbar-width: thin;
+        scrollbar-color: $terminal-green-glow transparent;
+
+        //Chrome/Safari Webkit
+        &::-webkit-scrollbar {
+            width: 6px;
+        } overflow-y: scroll;
+
+        //desktop
+        @include respond-to("desktop") {
+            height: 480px;
+            padding: 2rem;
+        }
+
+        @media (hover: hover) {
+            &__header:hover {
+                .terminal.dot svg {
+                    opacity: 1;
+                }
+            }
+        }
+
+        //smooth scrolling for the 'auto scroll' feel
+        scroll-behavior: smooth;
+
+    }
+}
