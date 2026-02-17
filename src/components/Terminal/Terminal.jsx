@@ -80,22 +80,19 @@ const Terminal = ({ onClose, onOpen }) => {
                     //Commands
                     switch (command) {
                         case 'help':
-                            response = 'AVAILABLE COMMANDS: ABOUT, PROJECTS, SKILLS, CLEAR, CONTACT, CD HELP';
+                            response = 'AVAILABLE COMMANDS: ABOUT, PROJECTS, SKILLS, CLEAR, CONTACT';
                             break;
                         case 'about':
-                            response = 'MICHAEL CROwE: CYBER SECURITY SPECIALIST & FULL-STACK DEVELOPER.';
+                            response = 'MICHAEL CROWE: CYBER SECURITY SPECIALIST & FULL-STACK DEVELOPER.';
                             break;
                         case 'projects':
-                            response = 'FETCHING RESOSITORIES...[PROJECT A], [PROJECT B], [PROJECT C]';
+                            response = 'FETCHING RESOSITORIES...No Data Found...Coming Soon!';
                             break;
                         case 'skills':
                             response = 'TECH STACK: REACT, SCSS, NODE.JS, PROGRAMMING: PYTHON, JAVA';
                             break;
                         case 'whoami':
                             response = 'GUEST_USER@MICHAEL_CROWE_OS: ACCESS_LEVEL_0';
-                            break;
-                        case 'whostheboss':
-                            response = 'Toni Danza';
                             break;
                         case 'clear':
                             setHistory([]);

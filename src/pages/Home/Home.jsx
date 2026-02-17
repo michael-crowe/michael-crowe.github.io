@@ -49,7 +49,7 @@ const Home = () => {
                                 <span className="token--mixin">@mixin</span> <span className="token--name">portfolio-core</span> {'{'} <br />
                                 &nbsp;&nbsp;<span className="token--prop">standards</span>: <span className="token--val">"BEM", "SCSS"</span>;<br />
                                 &nbsp;&nbsp;<span className="token--prop">layout</span>: <span className="token--val">"Mobile-First"</span>;<br />
-                                &nbsp;&nbsp;<span className="token--prop">contraints</span>: <span className="token--val">"No Z-Index"</span>;<br /><br />
+                                &nbsp;&nbsp;<span className="token--prop">constraints</span>: <span className="token--val">"No Z-Index"</span>;<br /><br />
                                 &nbsp;&nbsp;<span className="token--comment">// Stay professional.</span><br />
                                 &nbsp;&nbsp;<span className="token--selector">&:hover</span> {'{'}<br />
                                 &nbsp;&nbsp;&nbsp;&nbsp;<span className="token--prop">quality</span>: <span className="token--val">100%</span>;<br />
