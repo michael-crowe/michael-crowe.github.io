@@ -54,8 +54,8 @@
             "id": "2"
         },
         {
-            "name": "Terminal",
-            "path": "/Terminal",
+            "name": "About",
+            "path": "/About",
             "id": "3"
         }
     ],

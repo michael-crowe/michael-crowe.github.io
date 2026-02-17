@@ -15,6 +15,13 @@ $main-font: 'Inter', sans-serif;
 $neon-glow: 0 0 10px $terminal-green-glow;
 $border-glow: 15px solid $terminal-green;
 
+// Shadow effect for blobs
+:root {
+    --glass-shadow-x: 10px;
+    --glass-shadow-y: 20px;
+    --glass-glow-color: rgba(0, 242, 255, 0.2); //matching cyan blob
+}
+
 //Images
 $img-path: "/src/assets/images";
 

@@ -1,186 +1,199 @@
 @use '../../assets/styles/abstract/variables' as *;
 @use '../../assets/styles/abstract/mixins' as *;
+@use '../../assets/styles/abstract/animations' as *;
 
-
-// 1. Base Block
-.home {
-  display: flex;
-  flex-direction: column;
-  // Use calc to subtract the navbar height (approx 130px)
-  // This prevents the page from being taller than the screen
-  height: calc(100vh - 130px); 
-  height: calc(100dvh - 130px); // Modern mobile fix
-  
-  width: 100%;
-  overflow: hidden; // This explicitly disables vertical and horizontal scrolling
-  
-  padding: 1.5rem;
-  box-sizing: border-box;
-
-  @include respond-to("desktop") {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    align-items: center; 
-    align-content: center;
-    padding: 0 10%;
-    gap: 4rem;
-    
-    // Extra safety for 1920x1080 screens
-    max-height: calc(100vh - 130px);
-  }
-
-  
-  &__contnent, &__visual {
-
-    @include respond-to("desktop") {
-      margin-top: 0;
-      padding-top: 0;
-    }
-  }
-
-  //Elements
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-  }
-
-  //Terminal Layout Elements
-
-  &__terminal-logic {
-    min-height: 300px;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    word-wrap: normal;
-  }
-
-  &__status {
-    min-height: 1.5rem;
-    color: $terminal-green;
-    font-family: $code-font;
-    margin: 2rem;
-  }
-
-  &__name {
-    font-size: clamp(1rem, 5vw, 2rem);
-    color: $cyber-blue;
-    margin: 0.8rem 0;
-    white-space: nowrap;
-  }
-
-  // ├── Interests/
-  &__interests {
-    //initally hidden
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease;
-    margin-top: 1.5rem;
-
-    &--active {
-      //visiable when active
-      opacity: 1;
-      visibility: visible;
-    }
-
-    // intersts container
-    &-root {
-      margin-bottom: 0.8rem;
-
-      @include respond-to("tablet") {
-        margin-bottom: 0;
-      }
-    }
-
-    // each interest
-    &-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      list-style: none;
-      padding-left: 0.5rem;
-      
-
-      @include respond-to("tablet") {
-        padding-left: 1.5rem;
-        gap: 0;
-      }
-    }
-
-    &-item {
-      opacity: 0;
-      transform: translateX(-15px);
-      color: $terminal-green;
-      word-wrap: normal;
-      color: $cyber-blue;
-
-      // Trigger when parent is active
-      .home__interests--active & {
-        
-        animation: terminalSlideIn 0.4s forwards ease;
-
-        &:nth-child(1) { animation-delay: 0.5s; }
-        &:nth-child(2) { animation-delay: 1.0s; }
-        &:nth-child(3) { animation-delay: 1.5s; }
-        &:nth-child(4) { animation-delay: 2.0s; }
-        &:nth-child(5) { animation-delay: 2.5s; }
-      }
-    }
-  }
-
-  //Visual Section (Logo & Credits)
-  &__visual {
-display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 0; // Remove all margins
-
-    @include respond-to("desktop") {
-      padding-top: 4rem;
-      align-self: start;
-    }
-  }
-
-&__logo {
-    width: 100%;
-    max-width: 200px; // Mobile
-    height: auto;
-    filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.2));
-
-    @include respond-to("desktop") {
-      max-width: 380px; // Desktop (Balanced)
-    }
-  }
-
-  &__credits {
-    font-family: $code-font;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-align: center;
-
-    .highlight {
-      color: $terminal-green;
-      font-weight: bold;
-    }
-
-    .divider {
-      margin: 0.5rem 0;
-      opacity: 0.4;
-    }
-  }
-
+:root {
+    --glass-shadow-x: 10px;
+    --glass-shadow-y: 20px;
+    --glass-glow-color: rgba(0, 242, 255, 0.2);
+    --mouse-x: 0;
+    --mouse-y: 0;
 }
 
+.portfolio {
+    position: relative;
+    background: #0a0e14;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    min-height: 100vh;
+    overflow: hidden;
 
-// 5. Keyframes
-@keyframes terminalSlideIn {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    &__blob {
+        &--primary {
+            @include background-blob(#00f2ff, 350px, 25s);
+            top: -100px;
+            left: -50px;
+        }
+        &--secondary {
+            @include background-blob(#bc13fe, 450px, 18s);
+            top: 20%;
+            right: -100px;
+            animation-delay: -5s;
+        }
+    }
+}
+
+.hero {
+    perspective: 1200px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+
+    &__glass-card {
+        // Anti-Aliasing & Rendering Stability
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        outline: 1px solid transparent; // The "point" killer
+        transform-style: preserve-3d;
+        
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        padding: 3rem;
+        text-align: center;
+        color: white;
+        border-radius: 24px;
+        
+        // Dynamic Calculations
+        --tilt-x: calc(var(--mouse-y) * -10deg);
+        --tilt-y: calc(var(--mouse-x) * 10deg);
+        --shdw-x: calc(var(--mouse-x) * -20px);
+        --shdw-y: calc(var(--mouse-y) * -20px);
+
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(25px); 
+        -webkit-backdrop-filter: blur(25px);
+        
+        // Using inset shadow as border to prevent aliasing points
+        border: none;
+        box-shadow: 
+            var(--shdw-x) var(--shdw-y) 50px rgba(0, 0, 0, 0.4),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.2), // The clean border
+            inset 0 0 10px rgba(255, 255, 255, 0.1); 
+        
+        transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+
+        &:hover {
+            box-shadow: 
+                var(--shdw-x) var(--shdw-y) 60px var(--glass-glow-color),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.4),
+                inset 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                calc(135deg + (var(--mouse-x) * 10deg)), 
+                rgba(255, 255, 255, 0.15) 0%, 
+                transparent 50%
+            );
+            pointer-events: none;
+            border-radius: 24px;
+        }
+
+        &--code {
+            background: rgba(0, 0, 0, 0.4);
+            // Default Mobile Transform
+            transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+
+            @media (min-width: 768px) {
+                // Combined Desktop Transform
+                transform: translate3d(-40px, 0, -40px) 
+                           rotate(-2deg) 
+                           rotateX(var(--tilt-x)) 
+                           rotateY(var(--tilt-y));
+            }
+        }
+
+        .token {
+            &--mixin { color: #c586c0; }
+            &--name { color: #dcdcaa; } // Added this for the mixin name
+            &--prop { color: #9cdcfe; }
+            &--val { color: #ce9178; }
+            &--comment { color: #6a9955; font-style: italic; }
+            &--selector { color: #d7ba7d; }
+        }
+
+        &--profile {
+            margin-top: -60px;
+            background: rgba(255, 255, 255, 0.07);
+            // Default Mobile Transform
+            transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+
+            @media (min-width: 768px) {
+                margin-top: -80px;
+                margin-left: 80px;
+                // Combined Desktop Transform - translate3d must include all variables!
+                transform: translate3d(0, 0, 60px) 
+                           rotate(1deg) 
+                           rotateX(var(--tilt-x)) 
+                           rotateY(var(--tilt-y));
+            }
+        } 
+    }
+}
+
+.code-editor {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: -3rem -3rem 1.5rem -3rem; // Pulls it to the edge of the card padding
+        padding: 1rem 3rem;
+        background: rgba(255, 255, 255, 0.08);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px 24px 0 0;
+    }
+
+    &__body {
+        text-align: left;
+        font-family: 'Fira Code', monospace;
+        font-size: 0.9rem;
+    }
+}
+
+.glass-nav {
+    // This mixin needs to be accessible
+    @include glass-panel(0.15, 12px); 
+    
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    
+    // Pushing it forward in 3D space to stay above the cards
+    transform: translateX(-50%) translate3d(0, 0, 150px); 
+    
+    width: 90%;
+    max-width: 400px;
+    padding: 1.25rem;
+    
+    transform-style: preserve-3d; 
+    pointer-events: all;
+    
+    // Ensure the list behaves
+    &__list {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    &__link {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 }

@@ -1,0 +1,179 @@
+@use '../../assets/styles/abstract/variables' as *;
+@use '../../assets/styles/abstract/mixins' as *;
+
+
+// 1. Base Block
+.about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+  padding: 0 2rem;
+  
+  width: 100%;
+  overflow: hidden; // This explicitly disables vertical and horizontal scrolling
+  
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  @include respond-to("desktop") {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center; 
+    align-content: center;
+    padding: 0 10%;
+    gap: 4rem;
+    
+    // Extra safety for 1920x1080 screens
+    max-height: calc(100vh - 130px);
+  }
+
+  
+  &__content, &__visual {
+
+    @include respond-to("desktop") {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  //Elements
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+
+
+  &__status {
+    min-height: 1.5rem;
+    color: $terminal-green;
+    font-family: $code-font;
+    margin: 2rem;
+  }
+
+  &__name {
+    font-size: clamp(1rem, 5vw, 2rem);
+    color: $cyber-blue;
+    margin: 0.8rem 0;
+    white-space: nowrap;
+  }
+
+  // ├── Interests/
+  &__interests {
+    //initally hidden
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+    margin-top: 1.5rem;
+
+    &--active {
+      //visiable when active
+      opacity: 1;
+      visibility: visible;
+    }
+
+    // intersts container
+    &-root {
+      margin-bottom: 0.8rem;
+      align-items: flex-start;
+
+      @include respond-to("tablet") {
+        margin-bottom: 0;
+      }
+    }
+
+    // each interest
+    &-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      list-style: none;
+      padding-left: 0.5rem;
+      
+
+      @include respond-to("tablet") {
+        padding-left: 1.5rem;
+        gap: 0;
+      }
+    }
+
+    &-item {
+      opacity: 0;
+      transform: translateX(-15px);
+      color: $terminal-green;
+      word-wrap: normal;
+      color: $cyber-blue;
+
+      // Trigger when parent is active
+      .about__interests--active & {
+        
+        animation: terminalSlideIn 0.4s forwards ease;
+
+        &:nth-child(1) { animation-delay: 0.5s; }
+        &:nth-child(2) { animation-delay: 1.0s; }
+        &:nth-child(3) { animation-delay: 1.5s; }
+        &:nth-child(4) { animation-delay: 2.0s; }
+        &:nth-child(5) { animation-delay: 2.5s; }
+      }
+    }
+  }
+
+  //Visual Section (Logo & Credits)
+  &__visual {
+display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0; // Remove all margins
+
+    @include respond-to("desktop") {
+      padding-top: 4rem;
+      align-self: start;
+    }
+  }
+
+&__logo {
+    width: 100%;
+    max-width: 200px; // Mobile
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(0, 255, 65, 0.2));
+
+    @include respond-to("desktop") {
+      max-width: 380px; // Desktop (Balanced)
+    }
+  }
+
+  &__credits {
+    font-family: $code-font;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+
+    .highlight {
+      color: $terminal-green;
+      font-weight: bold;
+    }
+
+    .divider {
+      margin: 0.5rem 0;
+      opacity: 0.4;
+    }
+  }
+
+}
+
+
+// 5. Keyframes
+@keyframes terminalSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
