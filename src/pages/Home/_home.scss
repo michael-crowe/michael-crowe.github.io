@@ -19,16 +19,35 @@
     overflow: hidden;
 
     &__blob {
+
+        transform: translateZ(-50px);
+
+
         &--primary {
-            @include background-blob(#00f2ff, 350px, 25s);
+            @include background-blob(#00f2ff, 175px, 25s);
             top: -100px;
             left: -50px;
         }
         &--secondary {
-            @include background-blob(#bc13fe, 450px, 18s);
+            @include background-blob(#bc13fe, 225px, 18s);
             top: 20%;
             right: -100px;
             animation-delay: -5s;
+        }      
+    
+        //desktop
+        @media (min-width: 768px) {
+            &--primary {
+                @include background-blob(#00f2ff, 350px, 25s);
+                top: -100px;
+                left: -50px;
+            }
+            &--secondary {
+                @include background-blob(#bc13fe, 450px, 18s);
+                top: 20%;
+                right: -100px;
+                animation-delay: -5s;
+            }   
         }
     }
 }
@@ -43,21 +62,35 @@
     padding: 20px;
     overflow: hidden;
 
+    //desktop
+    @media (min-width: 768px) {
+        height: 100vh;
+    }
+
+
+
     &__glass-card {
         // Anti-Aliasing & Rendering Stability
         -webkit-backface-visibility: hidden;
         backface-visibility: hidden;
         -webkit-font-smoothing: antialiased;
-        outline: 1px solid transparent; // The "point" killer
+        outline: 1px solid transparent;
+
+
+        // Use preserve-3d on the parent to allow children (text)
         transform-style: preserve-3d;
-        
         position: relative;
         width: 100%;
-        max-width: 600px;
+        max-width: 300px;
         padding: 3rem;
         text-align: center;
         color: white;
-        border-radius: 24px;
+        border-radius: 24px; 
+
+        //desktop
+        @media (min-width: 768px) {
+            max-width: 600px; 
+        }
         
         // Dynamic Calculations
         --tilt-x: calc(var(--mouse-y) * -10deg);
@@ -65,12 +98,11 @@
         --shdw-x: calc(var(--mouse-x) * -20px);
         --shdw-y: calc(var(--mouse-y) * -20px);
 
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(25px); 
-        -webkit-backdrop-filter: blur(25px);
+        // 3. Chrome Fix: Isolation ensures the blur doesn't 'bleed' into the blobs
+        isolation: isolate;
+        will-change: transform;
+        background: rgba(255, 255, 255, 0.03); // Faint base to allow blur visiblity 
         
-        // Using inset shadow as border to prevent aliasing points
-        border: none;
         box-shadow: 
             var(--shdw-x) var(--shdw-y) 50px rgba(0, 0, 0, 0.4),
             inset 0 0 0 1px rgba(255, 255, 255, 0.2), // The clean border
@@ -78,30 +110,47 @@
         
         transition: transform 0.1s ease-out, box-shadow 0.3s ease;
 
-        &:hover {
+        // Unified blur layer (Pseudo-element)
+        // This handles both the blur and the Mouse-Gradient to prevent rendering conflicts
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+
+
+            //Dynamic Shine/Gradient
+            background: linear-gradient(
+                calc(135deg + (var(--mouse-x) * 10deg)), 
+                rgba(255, 255, 255, 0.15) 0%, 
+                transparent 50%
+            );
+
+            // 'Nudge' for Chromes's 3D engine
+            transform: translateZ(-1px);
+        }
+
+        &:hover { font-size: 0.9rem;
             box-shadow: 
                 var(--shdw-x) var(--shdw-y) 60px var(--glass-glow-color),
                 inset 0 0 0 2px rgba(255, 255, 255, 0.4),
                 inset 0 0 15px rgba(255, 255, 255, 0.2);
         }
 
-        &::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                calc(135deg + (var(--mouse-x) * 10deg)), 
-                rgba(255, 255, 255, 0.15) 0%, 
-                transparent 50%
-            );
-            pointer-events: none;
-            border-radius: 24px;
-        }
-
         &--code {
             background: rgba(0, 0, 0, 0.4);
+            
             // Default Mobile Transform
-            transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+            //transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+
+            transform: translate3d(-10px, 0, -30px) 
+            rotate(-6deg) 
+            rotateX(var(--tilt-x)) 
+            rotateY(var(--tilt-y));
+
+
 
             @media (min-width: 768px) {
                 // Combined Desktop Transform
@@ -113,30 +162,41 @@
         }
 
         .token {
-            &--mixin { color: #c586c0; }
-            &--name { color: #dcdcaa; } // Added this for the mixin name
-            &--prop { color: #9cdcfe; }
-            &--val { color: #ce9178; }
-            &--comment { color: #6a9955; font-style: italic; }
-            &--selector { color: #d7ba7d; }
+            &--mixin { color: #c586c0; } //mixin
+            &--name { color: #dcdcaa; } // mixin name
+            &--prop { color: #9cdcfe; } //property
+            &--val { color: #ce9178; } // value
+            &--comment { color: #6a9955; font-style: italic; } //comment
+            &--selector { color: #d7ba7d; } // hover
         }
 
         &--profile {
-            margin-top: -60px;
-            background: rgba(255, 255, 255, 0.07);
-            // Default Mobile Transform
-            transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+
+            //Critical Chrome Fix
+            //Setting 'flat' here prevents Chrome from creating a 'backdrop root'
+            // which usually kills the transparancy on titled elements
+            transform-style: flat;
+            filter: blur(0px); //Repaint trigger
+            backdrop-filter: blur(1px);
+
+            margin-top: -40px;
+            margin-left: 40px;
+            transform: translate3d(0, 0, 60px)
+                        rotate(2deg)
+                        rotateX(var(--tilt-x))
+                        rotateY(var(--tilt-y));
+            
+
 
             @media (min-width: 768px) {
                 margin-top: -80px;
                 margin-left: 80px;
-                // Combined Desktop Transform - translate3d must include all variables!
-                transform: translate3d(0, 0, 60px) 
-                           rotate(1deg) 
-                           rotateX(var(--tilt-x)) 
-                           rotateY(var(--tilt-y));
+                transform: translate3d(0, 0, 60px)
+                            rotate(1deg)
+                            rotateX(var(--tilt-x))
+                            rotateY(var(--tilt-y));
             }
-        } 
+        }
     }
 }
 
@@ -163,15 +223,21 @@
     // This mixin needs to be accessible
     @include glass-panel(0.15, 12px); 
     
-    position: fixed;
+    position: fixed;            h1, p{
+                font-size: medium;
+            }
     bottom: 30px;
     left: 50%;
     
     // Pushing it forward in 3D space to stay above the cards
     transform: translateX(-50%) translate3d(0, 0, 150px); 
+
+    isolation: isolate;
+    will-change: transform;
+    background: rgba(255, 255, 255, 0.03);
     
     width: 90%;
-    max-width: 400px;
+    max-width: 400px; font-size: 0.9rem;
     padding: 1.25rem;
     
     transform-style: preserve-3d; 

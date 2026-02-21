@@ -34,6 +34,7 @@ const Terminal = ({ onClose, onOpen }) => {
                         onClose();
                         break;
                     
+                    //Open Temrinal with Ctrl + O
                     case ctrlKey && key === 'o':
                         e.preventDefault();
                         onOpen();
@@ -80,13 +81,10 @@ const Terminal = ({ onClose, onOpen }) => {
                     //Commands
                     switch (command) {
                         case 'help':
-                            response = 'AVAILABLE COMMANDS: ABOUT, PROJECTS, SKILLS, CLEAR, CONTACT';
+                            response = 'AVAILABLE COMMANDS: about, whoami, skills, contact, clear, exit';
                             break;
                         case 'about':
                             response = 'MICHAEL CROWE: CYBER SECURITY SPECIALIST & FULL-STACK DEVELOPER.';
-                            break;
-                        case 'projects':
-                            response = 'FETCHING RESOSITORIES...No Data Found...Coming Soon!';
                             break;
                         case 'skills':
                             response = 'TECH STACK: REACT, SCSS, NODE.JS, PROGRAMMING: PYTHON, JAVA';
@@ -94,6 +92,11 @@ const Terminal = ({ onClose, onOpen }) => {
                         case 'whoami':
                             response = 'GUEST_USER@MICHAEL_CROWE_OS: ACCESS_LEVEL_0';
                             break;
+                        case 'cat /etc/passwd':
+                            response = "Silly bear, you can't do that!"
+                            break;
+                        case 'sudo cat /etc/passwd':
+                            response = "QXJlbid0IHlvdSBjbGV2ZXIsIHNpbGx5IGJlYXIh"
                         case 'clear':
                             setHistory([]);
                             setInput('');

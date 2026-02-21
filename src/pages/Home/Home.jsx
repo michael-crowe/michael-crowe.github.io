@@ -30,7 +30,7 @@ const Home = () => {
         <main className='portfolio' ref={portfolioRef}>
             <div className='portfolio__blob portfolio__blob--primary'></div>
             <div className='portfolio__blob portfolio__blob--secondary'></div>
-
+            
             <section className='hero'>
                 {/* Card 1: Code Editor */}
                 <div className='hero__glass-card hero__glass-card--code'>
