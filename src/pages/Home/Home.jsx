@@ -66,13 +66,6 @@ const Home = () => {
                     <p>Cyber Security. Developer. AI.</p>
                 </div>
             </section>
-
-            <nav className='glass-nav'>
-                <ul className='glass-nav__list'>
-                    <li className='glass-nav__item'><a href="#" className='glass-nav__link'>Projects</a></li>
-                    <li className='glass-nav__item'><a href="#" className='glass-nav__link'>About</a></li>
-                </ul>
-            </nav>
         </main>
     );
 };

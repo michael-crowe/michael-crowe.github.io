@@ -20,17 +20,21 @@
         }
     ],
     "projects": [
-        {
-            "name": "Portfolio Site",
-            "status": "In Progress",
-            "details": "Site that I built",
-            "technologies": [
-                "React", 
-                "Vite+",
-                "SCSS", 
-                "React Icons"
-            ]
-        }
+{
+        "id": "portfolio-2026",
+        "name": "Glass Portfolio",
+        "date": "TBD",
+        "status": "In Progress",
+        "thumbnail": "/assets/images/portfolio-preview.webp",
+        "shortDesc": "A 3D glassmorphism experience.",
+        "fullDesc": "A deep dive into 3D CSS rendering contexts, exploring the intersection of glassmorphism and performance on modern browser engines.",
+        "technologies": ["React", "Vite", "SCSS", "Playwright"],
+        "links": {
+            "github": "https://github.com/...",
+            "live": "https://..."
+        },
+        "featured": true
+    }
     ],
     "games": [
         {

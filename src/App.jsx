@@ -1,9 +1,12 @@
 import { createHashRouter,  RouterProvider, Outlet} from 'react-router-dom';
 import React, { useState } from 'react'
 
+//data
+import { useMousePosition } from './hooks/useMousePosition';
+
 //Pages
 import Home from './pages/Home/Home'
-import Archive from './pages/Archive/Archive';
+import Projects from './pages/Projects/Projects'
 import About from './pages/About/About';
 
 //Components
@@ -20,22 +23,25 @@ import '/src/assets/styles/main.scss';
 const RootLayout = () => {
   //Values for below
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
+  // Starts the mouse tracking for the whole app instantly
+  useMousePosition();
   
   //handlers for better readability
   const openTerminal = () => setIsTerminalOpen(true);
   const closeTerminal = () => setIsTerminalOpen(false);
-  const toggleTerminal = () => setIsTerminalOpen(prev => !prev);
 
   return (
     <div className='app-container'>
-      
       {/*Page Content */}
       <main className='main-content'>
         <Outlet />
       </main>
 
       {/* Global UI Elements (Stacked via DOM order NO z-index!) */}
-      
+
+      <Navbar />
+
       <TerminalTab
         isOpen={isTerminalOpen}
         onClick={openTerminal}
@@ -46,6 +52,7 @@ const RootLayout = () => {
         onClose={closeTerminal} //press red button to close
         onOpen={openTerminal} // for keyboard shortcuts
       />
+
     </div>
   );
 };
@@ -64,11 +71,11 @@ const router = createHashRouter([
         element: <Home />
       },
       {
-        path: 'archive',
-        element: <Archive />
+        path: '/projects',
+        element: <Projects />
       },
       {
-        path: 'about',
+        path: '/about',
         element: <About />
       }
     ]

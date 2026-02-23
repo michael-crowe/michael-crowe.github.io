@@ -20,16 +20,6 @@
   min-height: 100dvh; /* Modern standard  */
 }
 
-//glass effect
-@mixin glass-panel ($opacity: 0.1, $blur: 10px) {
-  background: rgba(255, 255, 255, $opacity);
-  backdrop-filter: blur($blur);
-  -webkit-backdrop-filter: blur($blur); // Safari support
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
 // blobs
 
 @mixin background-blob($color, $size: 300px, $opacity: 0.4, $duration: 20s) {
@@ -44,4 +34,65 @@
 
   // the animation
   animation: float-blob $duration ease-in-out infinite;
+}
+
+//glass effect
+@mixin glass-panel ($opacity: 0.1, $blur: 10px) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur); // Safari support
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+//Glass Card
+
+@mixin glass-engine {
+    // Standard Rendering Stability
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    isolation: isolate;
+    
+    // Dynamic background using React-injected variable
+    background: rgba(255, 255, 255, var(--card-opacity, 0.05));
+    
+    // Dynamic Tilt Engine
+    --tilt-x: calc(var(--mouse-y) * (var(--card-tilt-limit, 10deg) * -1));
+    --tilt-y: calc(var(--mouse-x) * var(--card-tilt-limit, 10deg));
+
+    @media (min-width: 768px) {
+       transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+
+    }
+   
+    
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        pointer-events: none;
+
+        // Dynamic Blur from React
+        backdrop-filter: blur(var(--card-blur, 25px));
+        -webkit-backdrop-filter: blur(var(--card-blur, 25px));
+
+        background: linear-gradient(
+            calc(135deg + (var(--mouse-x) * 10deg)), 
+            rgba(255, 255, 255, 0.12) 5%, 
+            transparent 50%
+        );
+
+        transform: translateZ(-1px);
+    }
+
+    &:hover {
+        box-shadow: 0 0 40px var(--card-glow, rgba(0, 242, 255, 0.2));
+    }
+
 }

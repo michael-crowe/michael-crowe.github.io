@@ -7,6 +7,12 @@
 // Layout (The Skeleton
 @use '/src/assets/styles/layout/layout';
 
+// Pages & Components (Add any new components style sheets here
+@use '/src/components/Navbar/navbar';
+@use '/src/components/Terminal/terminal';
+
+
+
 
 * {
     margin: 0;
@@ -16,43 +22,12 @@
 
 
 html, body {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    background: #0a0e14;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    min-height: 100vh;
+    overflow: hidden;
+
 }
 
-.app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background-color: $bg-charcoal;
-}
-
-.main-content {
-    flex: 1; // This pushes the CommandInput to the very bottom
-    display: flex;
-    flex-direction: column;
-    overflow-y:auto;
-    color: $terminal-green;
-    font-family: $code-font;
-}
-
-// Ensure your Navbar has the glow line
-.navbar {
-    border-bottom: 1px solid rgba($cyber-blue, 0.3); // Adjust color to your $cyber-blue
-    box-shadow: 0 4px 20px rgba($terminal-green, 0.2);
-    padding: 1rem 2rem;
-}
-
-
-// Global Hacker link style
-a {
-    color: $cyber-blue;
-    text-decoration: none;
-
-    &:hover {
-        text-shadow: $neon-glow;
-    }
-}

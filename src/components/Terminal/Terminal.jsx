@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { TERMINAL_PATHS } from '../../constants/terminalIcons'
+import { TERMINAL_PATHS } from '../../data/terminalIcons'
 import './_terminal.scss'
 
-const TerminalIcon = ({ path }) => (
+const TerminalIcon = ({ TERMINAL_PATHS }) => (
     <svg viewBox="0 0 24 24" xmls="http://www.w3.org/2000/svg">
-        <path d={path} fill="currentColor"/>
+        <path d={TERMINAL_PATHS} fill="currentColor"/>
     </svg>
 )
 

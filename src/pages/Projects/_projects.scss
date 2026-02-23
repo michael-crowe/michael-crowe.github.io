@@ -1,0 +1,38 @@
+@use '../../assets/styles/abstract/variables' as *;
+@use '../../assets/styles/abstract/mixins' as *;
+
+.projects {
+
+    &__blob {
+
+        transform: translateZ(-50px);
+
+
+        &--primary {
+            @include background-blob($blob-cyan, 175px, 25s);
+            top: -100px;
+            left: -50px;
+        }
+        &--secondary {
+            @include background-blob($blob-purple, 225px, 18s);
+            top: 20%;
+            right: -100px;
+            animation-delay: -5s;
+        }      
+    
+        //desktop
+        @media (min-width: 768px) {
+            &--primary {
+                @include background-blob($blob-cyan, 350px, 25s);
+                top: -100px;
+                left: -50px;
+            }
+            &--secondary {
+                @include background-blob($blob-purple, 450px, 18s);
+                top: 20%;
+                right: -100px;
+                animation-delay: -5s;
+            }   
+        }
+    }
+}

@@ -1,0 +1,10 @@
+The GlassCard
+
+Logic - JS
+Styles - SCSS and Mixins
+Structure - JSX
+
+- JS provides the mouse coordinates (--mouse.x)
+- JSX provides the design tokens (--card-blur)
+- SCSS does the math
+

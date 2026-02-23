@@ -1,4 +1,4 @@
-// src/constants/terminalIcons.js
+
 
 export const TERMINAL_PATHS = {
   // The 'X' icon

@@ -1,0 +1,13 @@
+@use '../../assets/styles/abstract/mixins' as *;
+
+.hero__glass-card {
+    @include glass-engine; // This pulls in all that complex logic
+    
+    border-radius: 24px;
+    position: relative;
+    width: 100%;
+    
+    // Add only the layout-specific styles here
+    &__header { padding-bottom: 1rem; }
+    &__body { margin-bottom: 2rem; }
+}

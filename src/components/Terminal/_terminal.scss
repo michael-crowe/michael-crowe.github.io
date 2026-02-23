@@ -93,10 +93,15 @@
     flex-direction: column;
     height: 100%;
     background-color: $dark-gray;
-    border: 1px solid rgba($terminal-green, 0.2);
+    border: 1px solid transparent;
+    transition:  transform 0.3s ease;
     border-radius: 12px; //slight round edge for 'floating' effect
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+    &--is-open {
+        border: 1px solid rgba($terminal-green, 0.2);
+    }
 
     &__header {
         display: flex;
