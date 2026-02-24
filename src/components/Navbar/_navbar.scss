@@ -64,17 +64,18 @@
         font-weight: 500;
         text-decoration: none;
         font-family: $code-font;
-        color: rgba($blob-cyan, 0.9);
+        color: $code-prop;
         letter-spacing: 2px;
+        transition: color 0.3s ease;
 
          &:hover {
-            color: rgba($blob-purple, 0.9) !important;
+            color: $cyber-blue;
 
         }
 
         @media (min-width: 768px) {
             font-weight: 800;
-            font-size: large;
+            font-size: 1.2rem;
         }
     }
 
@@ -99,23 +100,30 @@
         transition: all 0.3s ease;
         display: inline-block;
         position: relative;
-        color: rgba($blob-purple, 0.90);
+        color: $text-muted;
 
         @media (min-width: 768px) {
             font-size: large;
         }
 
         &:hover {
-            color: rgba($blob-cyan, 0.5) !important;
-
-            text-shadow: 
-                0 0 10px rgba($blob-purple, 0.90),
-                0 0 20px $blob-purple,
-                0 0 30px rgba($blob-purple, 0.5);
-
-            transform: scale(1.05);
-
+            color: $code-val;
         }
 
+        &--active {
+            color: $text-main;
+            text-shadow: 0 0 10px rgba($cyber-blue, 0.5);
+
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: 2px;
+                background: $cyber-blue;
+                box-shadow: 0 0 10px $cyber-blue;
+                margin-top: 4px;
+                border-radius: 2px;
+            }
+        }
     }
 }

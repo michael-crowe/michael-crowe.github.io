@@ -7,8 +7,19 @@ $alert-red: #ff3e3e; // Security Breach red
 $dark-gray: #1a1a1a; // Card background
 $dark-gray-header: #0a0a0a; //used in terminal
 
+// vscode colors
+// VS Code "Dark+" Palette
+$code-val: #ce9178;  // The Salmon/Orange color for strings and values
+$code-prop: #9cdcfe; // The Light Blue for properties (e.g., "standards:")
+$code-mix: #c586c0;  // The Purple for @mixins and keywords
+
+// Text colors
+$text-muted: rgba(255, 255, 255, 0.5); // Soft white for inactive links
+$text-main: #ffffff;
+
 // Fonts - Monospoace is key for the "Security" feel
-$code-font: 'Fria Code', 'Courier New', monospace;
+$code-font: 'Fira Code', 'Courier New', monospace;
+$code-prop: #9cdcfe;
 $main-font: 'Inter', sans-serif;
 
 // Effects

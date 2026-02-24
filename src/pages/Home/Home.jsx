@@ -36,11 +36,6 @@ const Home = () => {
                 <div className='hero__glass-card hero__glass-card--code'>
                     <div className="code-editor">
                         <header className="code-editor__header">
-                            <div className="code-editor__controls">
-                                <span className="code-editor__dot code-editor__dot--red"></span>
-                                <span className="code-editor__dot code-editor__dot--yellow"></span>
-                                <span className="code-editor__dot code-editor__dot--green"></span>
-                            </div>
                             <span className="code-editor__file-name">_standards.scss</span>
                         </header>
 
