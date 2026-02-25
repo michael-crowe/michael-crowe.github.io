@@ -58,13 +58,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 20px;
     overflow: hidden;
+
+    min-height: 100dvh;
+    padding: 2rem 1rem;
+    gap:1rem;
 
     //desktop
     @media (min-width: 768px) {
-        height: 100vh;
+        padding: 4rem;
+        gap: 4rem;
     }
 
 
