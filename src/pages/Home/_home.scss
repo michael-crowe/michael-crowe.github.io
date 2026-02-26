@@ -53,21 +53,28 @@
 }
 
 .hero {
-    perspective: 1200px; 
+     
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
 
-    min-height: 100dvh;
+    min-height: 100vh; //Older browser support
+    min-height: 100dvh; //Modern browser support
+
+    gap: 2rem;
     padding: 2rem 1rem;
-    gap:1rem;
+
+    //3D context
+    perspective: 1200px;
+    overflow-x: hidden;
+    overflow-y: auto; //Ensures user can scroll incase the content is greater than the screen
 
     //desktop
     @media (min-width: 768px) {
+        min-height: 100vh;
         padding: 4rem;
-        gap: 4rem;
+        gap: 3rem;
     }
 
 

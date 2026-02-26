@@ -3,12 +3,10 @@
 
 .navbar {
     position: fixed; //or Sticky
-    bottom: 2rem;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width:fit-content;
-    padding: 0;
+    bottom: calc(2rem + env(safe-area-inset-bottom)); //This fixes S24 FE Devices for nav bar
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
 
     @media (min-width: 768px) {
         width: 100%;
