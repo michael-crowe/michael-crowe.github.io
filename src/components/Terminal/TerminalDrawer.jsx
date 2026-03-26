@@ -1,12 +1,13 @@
 import React from 'react';
 import Terminal from './Terminal';
 
-const TerminalDrawer = ({ isOpen, onClose, onOpen}) => {
+const TerminalDrawer = ({setIsAdmin, isOpen, onClose, onOpen}) => {
     return (
         <aside className={`terminal-drawer ${isOpen ? 'terminal-drawer--is-open' : ''}`}>
             <Terminal
                 onOpen={onOpen}
-                onClose={onClose} 
+                onClose={onClose}
+                setIsAdmin={(setIsAdmin)}
             />
         </aside>
     );

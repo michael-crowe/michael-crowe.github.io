@@ -1,13 +1,14 @@
 import { createHashRouter,  RouterProvider, Outlet} from 'react-router-dom';
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 //data
 import { useMousePosition } from './hooks/useMousePosition';
 
 //Pages
-import Home from './pages/Home/Home'
-import Projects from './pages/Projects/Projects'
+import Home from './pages/Home/Home';
+import Projects from './pages/Projects/Projects';
 import About from './pages/About/About';
+import SecretProject from './pages/SecretProject/SecretProject';
 
 //Components
 import Navbar from './components/Navbar/Navbar';
@@ -18,15 +19,11 @@ import TerminalTab from './components/Terminal/TerminalTab';
 import '/src/assets/styles/main.scss';
 
 
-// creating layout component to keep navbar up top
-
-const RootLayout = () => {
-  //Values for below
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+const RootLayout = ({ isAdmin, setIsAdmin, isTerminalOpen, setIsTerminalOpen }) => {
 
   // Starts the mouse tracking for the whole app instantly
   useMousePosition();
-  
+
   //handlers for better readability
   const openTerminal = () => setIsTerminalOpen(true);
   const closeTerminal = () => setIsTerminalOpen(false);
@@ -40,7 +37,7 @@ const RootLayout = () => {
 
       {/* Global UI Elements (Stacked via DOM order NO z-index!) */}
 
-      <Navbar />
+      <Navbar isAdmin={isAdmin}/>
 
       <TerminalTab
         isOpen={isTerminalOpen}
@@ -49,45 +46,49 @@ const RootLayout = () => {
       
       <TerminalDrawer 
         isOpen={isTerminalOpen}
-        onClose={closeTerminal} //press red button to close
-        onOpen={openTerminal} // for keyboard shortcuts
+        onClose={closeTerminal}
+        onOpen={openTerminal}
+        setIsAdmin={setIsAdmin}
       />
 
     </div>
   );
 };
 
-
-//setting up the routers
-
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <RootLayout />, 
-    children:
-    [
-      {
-        index: true,
-        element: <Home />
-      },
-      {
-        path: '/projects',
-        element: <Projects />
-      },
-      {
-        path: '/about',
-        element: <About />
-      }
-    ]
-  }
-]);
-
 function App() {
+
+  const [isAdmin, setIsAdmin] = useState(() => {
+    return localStorage.getItem('portfolio_admin') === 'true';
+  });
+
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
+  // Define the router INSIDE App or use useMemo 
+  // so it updates when isAdmin changes
+  const router = useMemo(() => createHashRouter([
+    {
+      path: '/',
+      element: <RootLayout 
+                  isAdmin={isAdmin}
+                  setIsAdmin={setIsAdmin}
+                  isTerminalOpen={isTerminalOpen} 
+                  setIsTerminalOpen={setIsTerminalOpen} 
+                />, 
+      children: [
+        { index: true, element: <Home /> },
+        { path: '/projects', element: <Projects /> },
+        { path: '/about', element: <About /> },
+        //Conditional Route: Only exists if isAdmin is true
+        ...(isAdmin ? [{
+          path: '/admin', 
+          element: <SecretProject />
+        }] : [])
+      ]
+    }
+  ]), [isAdmin, isTerminalOpen]);
   
 
-  return (
-    <RouterProvider router={router} /> 
-  ) 
+  return <RouterProvider router={router} /> 
   
 }
 

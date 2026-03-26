@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import '/src/pages/About/About';
-import logo from '/src/assets/images/mike_logo.png';
-import TypeWriter from '/src/components/Typewriter/Typewriter';
 
 const About = () => {
 
