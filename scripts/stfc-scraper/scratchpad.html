@@ -1,0 +1,72 @@
+Officer Info Details
+
+<div class="item-header-container">
+    <div class="item-header">
+        <img src="https://assets.stfc.space/thumbs/officer/i/129.png" class="h-24">
+        <article class="item-header-info has-image">
+            <span class="flex flex-col stfc-filter-box-col">
+                <component>Neutral</component>
+                <component class="font-smibold text-sm">Engineering</component>
+                <h2>
+                    <component class="font-bold text-lg">Ahvix</component>
+                </h2>
+                <component>MUDD'S COMPANY</component>
+            </span>
+        </article>
+    </div>
+</div>
+
+name = h2 and a compoent inside with the class "font-bold text-lg"
+img = img block with the class "h-24"
+faction = class="flex flex-col stfc-filter-box-col" but the component inside
+class = "flex flex-col stfc-filter-box-col" the component inside with the class "class="font-smibold text-sm"
+group = compoent inside "flex flex-col stfc-filter-box-col" but has no class
+rarity = the only place I can find this is on the main page before clicking on the officer
+
+Below is the code from the main page where it displays the rarity, name and group
+
+<div class="min-w-0 flex-1 pr-1 md:pr-4 flex justify-between xs:grid gap-1 md:gap-4 grid-cols-mm-2-200">
+    <div class="truncate inline-flex flex-col justify-center">
+        <div class="inline-flex items-center truncate"><!----><!----><span
+                class="mr-1 px-2 inline-flex items-center text-xs leading-5 font-bold rounded-full bg-blue-300 text-gray-800"
+                role="img" aria-label="Rare">R</span><!----><!---->
+            <component class="font-bold">Ahvix</component>
+        </div>
+        <p class="mt-1 flex items-center text-sm h-6">
+            <component>MUDD'S COMPANY</component>
+        </p>
+    </div>
+    <div class="block flex-shrink-0 xs:pr-4">
+        <div class=""></div>
+    </div>
+</div>
+
+The code for the whole block for each officer on the main page 
+
+<div class="stfc-table-row-link__inner">
+    <div class="stfc-table-row-link__content">
+        <div class="flex-shrink-0 hidden xs:block"><img src="https://assets.stfc.space/thumbs/officer/i/129.png"
+                width="64" height="64"></div><!---->
+        <div class="min-w-0 flex-1 pr-1 md:pr-4 flex justify-between xs:grid gap-1 md:gap-4 grid-cols-mm-2-200">
+            <div class="truncate inline-flex flex-col justify-center">
+                <div class="inline-flex items-center truncate"><!----><!----><span
+                        class="mr-1 px-2 inline-flex items-center text-xs leading-5 font-bold rounded-full bg-blue-300 text-gray-800"
+                        role="img" aria-label="Rare">R</span><!----><!---->
+                    <component class="font-bold">Ahvix</component>
+                </div>
+                <p class="mt-1 flex items-center text-sm h-6">
+                    <component>MUDD'S COMPANY</component>
+                </p>
+            </div>
+            <div class="block flex-shrink-0 xs:pr-4">
+                <div class=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="hidden xs:block stfc-table-row-link__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="currentColor" aria-hidden="true" data-slot="icon" class="h-5 w-5 text-gray-400">
+            <path fill-rule="evenodd"
+                d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                clip-rule="evenodd"></path>
+        </svg></div>
+</div>

@@ -22,6 +22,7 @@
         //Explicitly set the variables here
         --card-blur: 25px; //Thinner blur for the nav. 0 for total see through
         --card-opacity: 0.1; // very subtle glass
+        --card-tilt-limit: 0deg; //keeps the movement off so the navbar doesn't follow the mouse
 
         // Ensure the mixin's background uses the variable
         background: rgba(255, 255, 255, var(--card-opacity));

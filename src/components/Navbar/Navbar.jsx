@@ -1,26 +1,36 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './_navbar.scss'
 
-const Navbar = () => {
+const Navbar = ({ isAdmin }) => {
+
+    const getLinkClass = ({ isActive }) =>
+        isActive ? 'navbar__link navbar__link--active' : 'navbar__link';
+
     return (
         <nav className="navbar">
             <div className="navbar__container">
-                <Link to='/' className="navbar__logo">
+                <NavLink to='/' className="navbar__logo">
                     {/* Logo or Name */}
                     MIKE_
-                </Link>
+                </NavLink>
                 {/*Lists to Pages */}
                 <ul className="navbar__list">
                     <li className="navbar__item">
-                        <Link to='/' className="navbar__link">Home</Link>
+                        <NavLink to='/' end className={getLinkClass}>Home</NavLink>
                     </li>
                     <li className="navbar__item">
-                        <Link to='/projects' className="navbar__link">Projects</Link>
+                        <NavLink to='/projects' className={getLinkClass}>Projects</NavLink>
                     </li>
                     <li className="navbar__item">
-                        <Link to='/about' className="navbar__link">About</Link>
+                        <NavLink to='/about' className={getLinkClass}>About</NavLink>
                     </li>
+
+                    {isAdmin && (
+                        <li>
+                            <NavLink to='./admin' className={getLinkClass}>[!] Admin</NavLink>
+                        </li>
+                    )}
                 </ul>
             </div>
         </nav>
