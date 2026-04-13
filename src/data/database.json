@@ -20,30 +20,42 @@
         }
     ],
     "projects": [
-{
-        "id": "portfolio-2026",
-        "name": "Glass Portfolio",
-        "date": "TBD",
-        "status": "In Progress",
-        "thumbnail": "/assets/images/portfolio-preview.webp",
-        "shortDesc": "A 3D glassmorphism experience.",
-        "fullDesc": "A deep dive into 3D CSS rendering contexts, exploring the intersection of glassmorphism and performance on modern browser engines.",
-        "technologies": ["React", "Vite", "SCSS", "Playwright"],
-        "links": {
-            "github": "https://github.com/...",
-            "live": "https://..."
+        {
+            "id": "portfolio-2026",
+            "name": "Glass Portfolio",
+            "date": "TBD",
+            "status": "In Progress",
+            "thumbnail": "/assets/images/portfolio-preview.webp",
+            "shortDesc": "A 3D glassmorphism experience.",
+            "fullDesc": "A deep dive into 3D CSS rendering contexts, exploring the intersection of glassmorphism and performance on modern browser engines.",
+            "technologies": ["React", "Vite", "SCSS", "Playwright"],
+            "links": {
+                "github": "https://github.com/michael-crowe/michael-crowe.github.io",
+                "live": "https://crowe-devsec.vercel.app"
+            },
+            "featured": true
         },
-        "featured": true
-    }
+        {
+            "id": "ai-project-2026",
+            "name": "SOP-IQ",
+            "date": "TBD",
+            "status": "In Progress",
+            "thumbnail": "/assets/images/portfolio-preview.webp",
+            "shortDesc": "AI-Driven Incident Response Automation",
+            "fullDesc": "An engineering tool designed to bridge the gap between raw security alerts and actionable response. It parses incident data and automatically generates step-by-step Standard Operating Procedures (SOPs) tailored to specific threat vectors.",
+            "technologies": ["React", "Vite", "SCSS", "Vercel Serverless", "OpenAI"],
+            "links": {
+                "github": "TBD",
+                "live": "TBD"
+            },
+            "featured": true
+        }
+
     ],
     "games": [
         {
-            "name": "Whiteout Survival",
+            "name": "Star Trek Fleet Commander",
             "Platform": "Mobile"
-        },
-        {
-            "name": "Battlefield 6",
-            "Platform": "Playstation 5"
         }
     ],
     "navLinks": [

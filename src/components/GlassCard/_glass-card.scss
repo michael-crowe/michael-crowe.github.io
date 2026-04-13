@@ -1,13 +1,83 @@
-@use '../../assets/styles/abstract/mixins' as *;
+@use '../../assets/styles/abstract/variables' as v;
+@use '../../assets/styles/abstract/mixins' as m;
+
+.glass-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+    
+    // Default variables to prevent "undefined" errors
+    --mouse-x: 0;
+    --mouse-y: 0;
+    --glass-glow-color: rgba(0, 242, 255, 0.2);
+
+    transform: rotate(var(--card-slant, 0deg))
+               rotateX(var(--tilt-x, 0deg))
+               rotateY(var(--tilt-y, 0deg));
+
+    &--interactive {
+        // Calculations for tilt and shadow based on LOCAL mouse variables
+        --tilt-x: calc(var(--mouse-y) * (var(--card-tilt-limit, 10deg) * -1));
+        --tilt-y: calc(var(--mouse-x) * var(--card-tilt-limit, 10deg));
+        --shdw-x: calc(var(--mouse-x) * -20px);
+        --shdw-y: calc(var(--mouse-y) * -20px);
+        
+        transition: transform 0.1s ease-out;
+    }
+}
 
 .hero__glass-card {
-    @include glass-engine; // This pulls in all that complex logic
+    @include m.glass-engine; // Pulls in background, blur, and standard hover
+    transform-style: preserve-3d;
+
+    &__body,
+    &__header,
+    &__footer,
+    &__content {
+        transform: translateZ(1px);
+        position: relative;
+        border-radius: inherit;
+        overflow: hidden;
+
+
+        // Anti-flicker fix for tilted text
+        -webkit-font-smoothing: antialiased;
+        backface-visibility: hidden;
+    }
     
-    border-radius: 24px;
     position: relative;
     width: 100%;
-    
-    // Add only the layout-specific styles here
-    &__header { padding-bottom: 1rem; }
-    &__body { margin-bottom: 2rem; }
+    padding: 2.5rem;
+    border-radius: 24px;
+    height: 200px;
+
+    // Dynamic Shadows that move with the tilt
+    box-shadow: 
+        var(--shdw-x, 0) var(--shdw-y, 0) 50px rgba(0, 0, 0, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+
+    &--detached {
+        margin-top: -35px;
+        height: 100px;     // The overlap from your image
+        width: 90%;            // Narrower "pill" look
+        padding: 1.5rem;
+        text-align: center;
+        
+        // Pushes this card "closer" to the camera in 3D space
+        transform: translate3d(0, 0, 60px); 
+        
+        // Ensure this doesn't double-tilt
+        transform-style: flat; 
+        background: rgba(0, 0, 0, 0.3); // Slightly darker base
+
+        .hero__glass-card__content {
+            transform: translateZ(1px);
+        }
+    }
+
+    // Specific formatting for the profile content
+    h1, h2 { color: v.$cyber-blue; margin-bottom: 0.25rem; }
+    p { font-style: italic; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); }
 }
