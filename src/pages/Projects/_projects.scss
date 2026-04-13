@@ -1,7 +1,13 @@
 @use '../../assets/styles/abstract/variables' as *;
 @use '../../assets/styles/abstract/mixins' as *;
+@use '../../assets/styles/abstract/animations' as *;
 
 .projects {
+
+    &__container{
+        background: transparent;
+        position: relative;
+    }
 
     &__blob {
 
@@ -33,6 +39,58 @@
                 right: -100px;
                 animation-delay: -5s;
             }   
+        }
+    }
+}
+
+.projects__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: rem;
+
+    @media (min-width: 768) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.project-info{
+    &__desc {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.95rem;
+        line-height: 1.6rem;
+    }
+
+    &__tech-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+        list-style: none;
+        padding: 0;
+    }
+
+    &__tech-tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+
+    &__btn {
+        text-decoration: none;
+        font-size: 0.85rem;
+        color: $blob-cyan;
+
+        &--primary {
+            font-weight: bold;
+            border-bottom: 1px solid $blob-cyan;
         }
     }
 }

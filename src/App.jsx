@@ -21,9 +21,6 @@ import '/src/assets/styles/main.scss';
 
 const RootLayout = ({ isAdmin, setIsAdmin, isTerminalOpen, setIsTerminalOpen }) => {
 
-  // Starts the mouse tracking for the whole app instantly
-  useMousePosition();
-
   //handlers for better readability
   const openTerminal = () => setIsTerminalOpen(true);
   const closeTerminal = () => setIsTerminalOpen(false);
